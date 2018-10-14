@@ -11,27 +11,41 @@ if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
 {
     //prüfen ob login ok oder nicht
     // if($_POST['benutzername'] == "martin" AND $_POST['kennwort'] == "1234")
+    
+    $benutzer="root"; //später in ein db.inc.php
+    $passwort="";
+    $dbname="login";
+    $link = mysqli_connect("localhost", $benutzer, $passwort, $dbname);
+    mysqli_query($link, "SET NAMES 'utf-8'");
+    $abfrage="select * from users";
+    $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+    
     $login = @$_POST['benutzername'].$_POST['kennwort'];
     echo $login."<br/>";
-    $logins=file("login.csv"); //logins wird zeilenweise aus csv gelesen
-    for($i = 0; $i<sizeof($logins);$i++)
+    
+    while($zeile= mysqli_fetch_array($ergebnis))
     {
-        $zeile= explode(';', $logins[$i]);
-        echo $zeile[0].$zeile[1].$zeile[2].$zeile[3]."<br/>";
-        $login2=$zeile[0].$zeile[1];
        
-       
+             $login2 = $zeile['user_name'].$zeile['user_password'];
+        
+            echo $login2."<br/>";
+ 
+           
         
         if($login==$login2) //eingelesenes wird mit benutzer login verglichen
         {
             $eingeloggt = true;
-             $benutzertyp = $zeile[3]; //benutzertyp wird ausgelesen und gespeichert
+             $benutzertyp = $zeile['user_typ']; //benutzertyp wird ausgelesen und gespeichert
              $benutzertyp = trim($benutzertyp,"\n");
             break;
         }
- 
+       
     }
-
+    
+    
+    
+    
+     mysqli_close($link);
 }
 
 
