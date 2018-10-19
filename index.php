@@ -1,3 +1,4 @@
+
         <?php
         include 'sessionHandler.php';
         @sessionHandler.open_session();
