@@ -1,5 +1,6 @@
 <?php
 include 'sessionHandler.php';
+include './dbConnenctor.php';
 // vorhandene session übernehmen
 @sessionHandler.open_session();
 
@@ -11,14 +12,10 @@ if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
 {
     //prüfen ob login ok oder nicht
     // if($_POST['benutzername'] == "martin" AND $_POST['kennwort'] == "1234")
-    
-    $benutzer="root"; //später in ein db.inc.php
-    $passwort="";
-    $dbname="login";
-    $link = mysqli_connect("localhost", $benutzer, $passwort, $dbname);
-    mysqli_query($link, "SET NAMES 'utf-8'");
+    $dbC = new dbConnector();
+    $dbC->connect();
     $abfrage="select * from users";
-    $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+    $ergebnis = mysqli_query($dbC->getLink(), $abfrage) or die(mysqli_error($dbC->getLink()));
     
     $login = @$_POST['benutzername'].$_POST['kennwort'];
     echo $login."<br/>";
@@ -26,26 +23,26 @@ if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
     while($zeile= mysqli_fetch_array($ergebnis))
     {
        
+           
              $login2 = $zeile['user_name'].$zeile['user_password'];
         
             echo $login2."<br/>";
  
            
-        
-        if($login==$login2) //eingelesenes wird mit benutzer login verglichen
-        {
-            $eingeloggt = true;
-             $benutzertyp = $zeile['user_typ']; //benutzertyp wird ausgelesen und gespeichert
-             $benutzertyp = trim($benutzertyp,"\n");
-            break;
-        }
-       
+        if (password_verify($_POST['kennwort'], $zeile['user_password'])) {
+
+                    if($_POST['benutzername']==$zeile['user_name']) //eingelesenes wird mit benutzer login verglichen
+                  {
+                      $eingeloggt = true;
+                       $benutzertyp = $zeile['user_typ']; //benutzertyp wird ausgelesen und gespeichert
+                       $benutzertyp = trim($benutzertyp,"\n");
+                      break;
+                  }
+         }
     }
     
-    
-    
-    
-     mysqli_close($link);
+   
+     mysqli_close($dbC->getLink());
 }
 
 
