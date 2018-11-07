@@ -19,6 +19,26 @@ function connect() {
     
 }
 
+function delete($id){
+       $abfrage="delete from users where user_id='$id'";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: ";
+    }
+}
+
+function update($id,$name, $password, $benutzertyp){
+       $abfrage="update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";
+
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: ";
+    }
+}
+
 
 public function getLink()
 {
@@ -45,9 +65,42 @@ function insert($name, $password, $benutzertyp)
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+    
+}
+
+function selectUsers(){
+    $abfrage="select * from users";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
 
     
     
-}}
+}
+
+
+function selectUsersColumnNames()
+{
+
+        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'login' AND TABLE_NAME = 'users'";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+   
+}
+function iterateResult($ergebnis)
+{
+    return mysqli_fetch_array($ergebnis);
+}
+
+    }
+    
+
 
 /* quelle https://stackoverflow.com/questions/4478661/getter-and-setter */

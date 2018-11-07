@@ -1,6 +1,7 @@
 <?php
 include 'sessionHandler.php';
 include './dbConnenctor.php';
+
 // vorhandene session übernehmen
 @sessionHandler.open_session();
 
@@ -8,6 +9,8 @@ if(!@sessionHandler.session_is_open())
 {
 $eingeloggt = false;
 }
+
+
 if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
 {
     //prüfen ob login ok oder nicht
