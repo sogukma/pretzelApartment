@@ -6,9 +6,7 @@
  * Time: 08:30
  */
 
-namespace controller;
 
-use service\AuthServiceImpl;
 
 class AuthController
 {

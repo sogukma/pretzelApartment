@@ -14,7 +14,8 @@
             echo "Ihre Session-ID: ".session_id();
             echo "<br/><a href='index.php'>Logout </a>";
             
-             echo "<a href=\"register.php\"> Jetzt haben Sie auch Zutritt zu dieser Seite</a>";
+             echo "<a href=\"register.php\"> Verwalte Personen</a>";
+            echo "<a href=\"rechnung.php\"> Verwalte Rechnungen</a>";
         ?>
     </body>
 </html>

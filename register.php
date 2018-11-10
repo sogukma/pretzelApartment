@@ -5,7 +5,7 @@
         sessionHandler.open_session(); //vorhandene session übernehmen
         SessionHandler.isCorrectPape("abwart");
         
-        $dbc = new dbConnector();
+        $dbc = dbConnector::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
             
@@ -38,7 +38,8 @@
                  url: "update.php",
                  data: { action: data },               
                 success: function(msg) { 
-                       thisform.parent().append(msg);
+                        thisform.parent().append(msg);
+                   
                         }
              
                 });

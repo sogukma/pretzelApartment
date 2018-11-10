@@ -4,7 +4,7 @@
         sessionHandler.open_session(); //vorhandene session übernehmen
         SessionHandler.isCorrectPape("abwart");
         
-        $dbc = new dbConnector();
+        $dbc = dbConnector::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
 

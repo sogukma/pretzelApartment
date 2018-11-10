@@ -1,8 +1,6 @@
 <?php
 
-namespace dao;
 
-use domain\AuthToken;
 
 /**
  * @access public

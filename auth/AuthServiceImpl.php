@@ -6,16 +6,10 @@
  * Time: 14:39
  */
 
-namespace service;
+use AuthService;
 
-use domain\Customer;
-use domain\Agent;
-use domain\AuthToken;
-use dao\CustomerDAO;
-use dao\AgentDAO;
-use http\HTTPException;
-use http\HTTPStatusCode;
-use dao\AuthTokenDAO;
+
+
 
 /**
  * @access public

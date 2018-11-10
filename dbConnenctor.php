@@ -7,14 +7,27 @@ class dbConnector
  private $passwort;
  private $dbname;
  
+   public static function Instance()
+    {
+        static $inst = null;
+        if ($inst === null) {
+            $inst = new dbConnector();
+        }
+        return $inst;
+    }
+
+ 
+ 
  function __construct() {
     $this->benutzer="root";
     $this->passwort="";
     $this->dbname="login";
  }
 function connect() {
+
     $this->link = mysqli_connect("localhost", $this->benutzer, $this->passwort, $this->dbname);
     mysqli_query($this->link, "SET NAMES 'utf-8'");
+    
     
     
 }
@@ -31,6 +44,19 @@ function delete($id){
 
 function update($id,$name, $password, $benutzertyp){
        $abfrage="update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";
+
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: ";
+    }
+}
+
+
+
+function updateInvoice($id, $status, $fkid){
+        echo "persistence: ". $id." ".$status." ".$fkid;
+       $abfrage="update rechnung set status = '$status' where fk_userId='$fkid' and id='$id'";
 
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
@@ -68,8 +94,36 @@ function insert($name, $password, $benutzertyp)
     
 }
 
+function insertInvoice($userId, $rechnungstyp, $status, $betrag)
+{
+ 
+    $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
+    VALUES ('$rechnungstyp', '$status', '$betrag', '$userId')";
+
+    if (mysqli_query($this->link, $sql)) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    
+}
+
 function selectUsers(){
     $abfrage="select * from users";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    
+    
+}
+
+
+function selectInvoices(){
+    $abfrage="select * from rechnung";
     
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
@@ -94,6 +148,21 @@ function selectUsersColumnNames()
     }
    
 }
+
+function selectInvoicesColumnNames()
+{
+
+        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'login' AND TABLE_NAME = 'rechnung'";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+   
+}
+
+
 function iterateResult($ergebnis)
 {
     return mysqli_fetch_array($ergebnis);

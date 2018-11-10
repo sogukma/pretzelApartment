@@ -6,9 +6,8 @@
  * Time: 14:39
  */
 
-namespace service;
 
-use domain\Agent;
+
 
 /**
  * @access public
