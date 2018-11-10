@@ -10,6 +10,8 @@
         $dbc = dbConnector::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
+        echo "meine id: ".$_GET['id'];
+        $_SESSION['id'] = $_GET['id'];
             
 ?>
 <html>
@@ -45,20 +47,17 @@
     </head>
     <body>
    
-    <form method="post" action="rechnung.php">
+    <form method="post" action="rechnung.php?id=<?=$_SESSION['id']?>">
         Benutzer:
-        <select name="user">
-        <?php
-          $ergebnis = $_SESSION['dbconnection']->selectUsers();
-                
-            while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
-            {        
 
-             echo '<option value="'.TemplateView::noHTML($zeile[0]).'">'.TemplateView::noHTML($zeile[1]).'</option>';
-            }
-        
-        ?>
-        </select>
+        <?php
+          $ergebnis = $_SESSION['dbconnection']->selectUsersNameById( $_SESSION['id'] );
+
+          while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
+          {
+             echo '<h2 value="'.TemplateView::noHTML($zeile[0]).'">'.TemplateView::noHTML($zeile[0]).'</h2>';
+          }
+        ?><br/>
         Betrag:<input name="betrag" type="text" required=""/><br/>
         Rechnungstyp:
           <input type="radio" name="rechnungstyp" value="heizung" checked> Heizung<br/>
@@ -75,7 +74,7 @@
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
                     echo '</tr>';
-                     $ergebnis = $_SESSION['dbconnection']->selectInvoices();
+                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['id']);
                 
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
@@ -92,7 +91,8 @@
         function rechnung()
         {
  
-            $userId = $_POST["user"];
+            $userId = $_GET['id'];
+            echo 'not persistence here:'.$userId;
             $rechnungstyp = $_POST["rechnungstyp"];
             $betrag = $_POST["betrag"];
             $_SESSION['dbconnection']->insertInvoice($userId, $rechnungstyp, "offen", $betrag);

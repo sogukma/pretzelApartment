@@ -57,9 +57,10 @@ function update($id,$name, $password, $benutzertyp){
 function updateInvoice($id, $status, $fkid){
         echo "persistence: ". $id." ".$status." ".$fkid;
        $abfrage="update rechnung set status = '$status' where fk_userId='$fkid' and id='$id'";
-
+       
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
+        echo "<popup>Änderung erfogreich vorgenommen</popup>";
     } else {
         echo "Error: ";
     }
@@ -96,7 +97,7 @@ function insert($name, $password, $benutzertyp)
 
 function insertInvoice($userId, $rechnungstyp, $status, $betrag)
 {
- 
+    echo "persistence here: ".$userId;
     $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
     VALUES ('$rechnungstyp', '$status', '$betrag', '$userId')";
 
@@ -110,6 +111,30 @@ function insertInvoice($userId, $rechnungstyp, $status, $betrag)
 
 function selectUsers(){
     $abfrage="select * from users";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+       
+}
+
+function selectUsersNameById($userId){
+    $abfrage="select user_name from users where user_id = '$userId'";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+       
+}
+
+function selectInvoicesFromUserById($userId){
+    $abfrage="select * from rechnung where fk_userId = '$userId'";
     
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);

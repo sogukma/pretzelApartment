@@ -30,7 +30,8 @@ else
              echo $status."".$_SESSION['user_id_2']."".$_SESSION['fk_user_id'];
              $dbc = dbConnector::Instance();
               $dbc->updateInvoice($_SESSION['user_id_2'],$status, $_SESSION['fk_user_id']);
-            header("Location:rechnung.php");
+            
+            header("Location:register.php");
     };
             
    if(isset($_POST['submit']))

@@ -29,7 +29,6 @@
 
             });
                    
-   
           $('.update').click(function() {
                data = $(this).parent().parent().attr('id');
                 var thisform = $(this);
@@ -43,6 +42,27 @@
                         }
              
                 });
+            });
+   
+   
+          $('.rechnung').click(function() {
+              data = $(this).parent().parent().attr('id');
+              window.open("rechnung.php?id="+ encodeURIComponent(data));
+           //   window.location = "http://localhost/first.php?q=" + encodeURIComponent(checkB) + "&p=" + encodeURIComponent(tableName);
+              /*
+               data = $(this).parent().parent().attr('id');
+                var thisform = $(this);
+                $.ajax({
+                 type: "POST",
+                 url: "rechnung.php",
+                 data: { action: data },               
+                success: function(msg) { 
+                        thisform.parent().append(msg);
+                   
+                        }
+             
+                });
+                */
             });
 
                 
@@ -75,7 +95,7 @@
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                      
-                      echo '<tr id="'.$zeile[0].'"><td>'. TemplateView::noHTML($zeile[0]).'</td><td>'.TemplateView::noHTML($zeile[1]) .'</td><td>'.TemplateView::noHTML($zeile[2]) .'</td><td>'.TemplateView::noHTML($zeile[3]) .'</td><td><button  class="delete">delete</button></td><td><button class="update">update</button></td></tr>';
+                      echo '<tr id="'.$zeile[0].'"><td>'. TemplateView::noHTML($zeile[0]).'</td><td>'.TemplateView::noHTML($zeile[1]) .'</td><td>'.TemplateView::noHTML($zeile[2]) .'</td><td>'.TemplateView::noHTML($zeile[3]) .'</td><td><button  class="delete">delete</button></td><td><button class="update">update</button></td><td><button class="rechnung">Eechnung einsehen</button></td></tr>';
                      
                      }
                 ?>
