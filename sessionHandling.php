@@ -1,5 +1,25 @@
 <?php
-function open_session() {
+
+class sessionHandling
+{
+
+      public static function Instance()
+    {
+        static $inst = null;
+        if ($inst === null) {
+            $inst = new sessionHandling();
+        }
+        return $inst;
+    }
+
+ 
+ 
+ function __construct() {
+     
+ }
+    
+    
+public function open_session() {
      session_start();
      $_SESSION['is_open'] = TRUE;
 }
@@ -29,7 +49,7 @@ function isCorrectPape($usertype)
     }
 
 }
-
+}
 /* 
  * https://stackoverflow.com/questions/3788369/how-to-tell-if-a-session-is-active
  */

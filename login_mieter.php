@@ -6,9 +6,10 @@
     
     <body>
         <?php
-        include 'sessionHandler.php';
-        SessionHandler.open_session(); //vorhandene session übernehmen
-        SessionHandler.isCorrectPape("mieter");
+        include 'sessionHandling.php';
+        $sh = sessionHandling::Instance();
+        $sh->open_session(); //vorhandene session übernehmen
+        $sh->isCorrectPape("mieter");
         
             echo "Hallo Mieter Sie haben vollen Zugriff auf die Daten! <br/>";
             echo "Ihre Session-ID: ".session_id();

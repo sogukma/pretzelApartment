@@ -1,11 +1,12 @@
 <?php
-include 'sessionHandler.php';
+include 'sessionHandling.php';
 include './dbConnenctor.php';
 
+$sh = sessionHandling::Instance();
 // vorhandene session übernehmen
-@sessionHandler.open_session();
+$sh->open_session();
 
-if(!@sessionHandler.session_is_open())
+if(!$sh->session_is_open())
 {
 $eingeloggt = false;
 }

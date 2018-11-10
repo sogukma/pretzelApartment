@@ -1,10 +1,11 @@
 
         <?php
-        include 'sessionHandler.php';
-        @sessionHandler.open_session();
+        include './sessionHandling.php';
+        $sh = sessionHandling::Instance();
+        $sh->open_session();
         //session_start() übernimmt eine bestehende session
         
-        @sessionHandler.destroy_session(); //löschen aller session variablen
+        $sh->destroy_session(); //löschen aller session variablen
         session_unset();
         
         

@@ -1,9 +1,10 @@
 <?php
  
-     include 'sessionHandler.php';
+     include 'sessionHandling.php';
     include './dbConnenctor.php';
-        sessionHandler.open_session(); //vorhandene session übernehmen
-        SessionHandler.isCorrectPape("abwart");
+    $sh = sessionHandling::Instance();
+        $sh->open_session(); //vorhandene session übernehmen
+        $sh->isCorrectPape("abwart");
         
         $dbc = dbConnector::Instance();
         $dbc->connect();

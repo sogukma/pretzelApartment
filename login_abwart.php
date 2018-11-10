@@ -6,9 +6,10 @@
     
     <body>
         <?php
-        include 'sessionHandler.php';
-        sessionHandler.open_session(); //vorhandene session übernehmen
-        SessionHandler.isCorrectPape("abwart");
+        include 'sessionHandling.php';
+        $sh = sessionHandling::Instance();
+        $sh->open_session(); //vorhandene session übernehmen
+        $sh->isCorrectPape("abwart");
         
             echo "Hallo Abwart. Sie haben vollen Zugriff auf die Daten! <br/>";
             echo "Ihre Session-ID: ".session_id();
