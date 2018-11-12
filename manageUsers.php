@@ -1,12 +1,12 @@
 <?php
         include 'sessionHandling.php';
-        include './dbConnenctor.php';
+        include './DAO.php';
         include './TemplateView.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
         $sh->isCorrectPape("abwart");
         
-        $dbc = dbConnector::Instance();
+        $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
             
@@ -21,7 +21,7 @@
                var data = $(this).parent().parent().attr('id');
                 $.ajax({
                  type: "POST",
-                 url: "delete.php",
+                 url: "deleteUser.php",
                  data: { action: data }
                }).done(function() {
                  window.location.reload();   
@@ -35,7 +35,7 @@
                 var thisform = $(this);
                 $.ajax({
                  type: "POST",
-                 url: "update.php",
+                 url: "updateUser.php",
                  data: { action: data },               
                 success: function(msg) { 
                         thisform.parent().append(msg);
@@ -48,14 +48,14 @@
    
           $('.rechnung').click(function() {
               data = $(this).parent().parent().attr('id');
-              window.open("rechnung.php?id="+ encodeURIComponent(data));
+              window.open("manageInvoices.php?id="+ encodeURIComponent(data));
            //   window.location = "http://localhost/first.php?q=" + encodeURIComponent(checkB) + "&p=" + encodeURIComponent(tableName);
               /*
                data = $(this).parent().parent().attr('id');
                 var thisform = $(this);
                 $.ajax({
                  type: "POST",
-                 url: "rechnung.php",
+                 url: "manageInvoices.php",
                  data: { action: data },               
                 success: function(msg) { 
                         thisform.parent().append(msg);
@@ -73,7 +73,7 @@
     </head>
     <body>
    
-    <form method="post" action="register.php">
+    <form method="post" action="manageUsers.php">
         Name:<input name="nname" type="text" required/><br/>
         Password:<input name="password" type="password" required=""/><br/>
         Benutzername:
@@ -105,7 +105,7 @@
         
         <?php
       
-        function register()
+        function insertUser()
         {
  
             $name = $_POST["nname"];
@@ -120,7 +120,7 @@
         
         if(isset($_POST['submit']))
         {
-           register();
+           insertUser();
         } 
         ?>
         

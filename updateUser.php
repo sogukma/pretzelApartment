@@ -1,11 +1,11 @@
 <?php
      include 'sessionHandling.php';
-    include './dbConnenctor.php';
+    include './DAO.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
         $sh->isCorrectPape("abwart");
         
-        $dbc = dbConnector::Instance();
+        $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
 
@@ -27,7 +27,7 @@ else
             $password = password_hash($password, PASSWORD_DEFAULT);
             $benutzertyp = $_POST["benutzertyp"];
             $_SESSION['dbconnection']->update($_SESSION['user_id'],$name, $password, $benutzertyp);
-             header("Location:register.php");
+             header("Location:manageUsers.php");
     };
             
    if(isset($_POST['submit']))

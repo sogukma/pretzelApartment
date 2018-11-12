@@ -1,12 +1,12 @@
 <?php
  
      include 'sessionHandling.php';
-    include './dbConnenctor.php';
+    include './DAO.php';
     $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
         $sh->isCorrectPape("abwart");
         
-        $dbc = dbConnector::Instance();
+        $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
 
@@ -29,10 +29,10 @@ else
             $status = $_POST["status"];
             
              echo $status."".$_SESSION['user_id_2']."".$_SESSION['fk_user_id'];
-             $dbc = dbConnector::Instance();
+             $dbc = DAO::Instance();
               $dbc->updateInvoice($_SESSION['user_id_2'],$status, $_SESSION['fk_user_id']);
             
-            header("Location:register.php");
+            header("Location:manageUsers.php");
     };
             
    if(isset($_POST['submit']))

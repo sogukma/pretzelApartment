@@ -1,6 +1,6 @@
 <?php
 include 'sessionHandling.php';
-include './dbConnenctor.php';
+include './DAO.php';
 
 $sh = sessionHandling::Instance();
 // vorhandene session übernehmen
@@ -16,7 +16,7 @@ $eingeloggt = false;
     {
         //prüfen ob login ok oder nicht
         // if($_POST['benutzername'] == "martin" AND $_POST['kennwort'] == "1234")
-        $dbC = dbConnector::Instance();
+        $dbC = DAO::Instance();
         $dbC->connect();
         $abfrage="select * from users";
         $ergebnis = mysqli_query($dbC->getLink(), $abfrage) or die(mysqli_error($dbC->getLink()));
@@ -65,16 +65,13 @@ if(@$eingeloggt)
     echo "Ihr Login war erfolgreich";
     echo "<h2>Herzlich willkommen ".$_SESSION['benutzername']."</h2>";
     echo "Ihre Session-ID lautet:".session_id()."<br/>";
-    echo $benutzertyp;
     if($_SESSION['benutzertyp'] == 'abwart')
     {
-        var_dump($benutzertyp);
-    echo "<a href=\"login_abwart.php\"> Jetzt haben Sie auch Zutritt zu dieser Seite</a>";
+    header("Location: startscreenCaretaker.php");
     }
     if($_SESSION['benutzertyp'] == 'mieter')
     {
-        var_dump($benutzertyp);
-    echo "<a href=\"login_mieter.php\"> Jetzt haben Sie auch Zutritt zu dieser Seite</a>";  
+    header("Location: startscreenTentant.php");
     }
 }
 

@@ -23,7 +23,7 @@
     </head>
     <body>
         <h3>Bitte melden Sie sich an: </h3>
-        <form action="login_b.php" method="POST">
+        <form action="login.php" method="POST">
             <input type="text" name="benutzername" size="30" />Benutzername<br/>
             <input type="password" name="kennwort" size="30" />Passwort<br/>
             <input type="submit" value="einloggen" /><br/>

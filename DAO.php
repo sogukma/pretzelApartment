@@ -1,6 +1,6 @@
 <?php
 
-class dbConnector
+class DAO
 {
  private $link;
  private $benutzer; //später in ein db.inc.php
@@ -11,7 +11,7 @@ class dbConnector
     {
         static $inst = null;
         if ($inst === null) {
-            $inst = new dbConnector();
+            $inst = new DAO();
         }
         return $inst;
     }
