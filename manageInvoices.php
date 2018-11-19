@@ -119,7 +119,11 @@
           <input name="submit" class="btn btn-primary" type="submit">
           <input class="btn" type="reset"><br/>
     </form>
+        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="get" target="_blank">
+            <input class="btn" type="submit" value="PDF">
             
+        </form>
+        
         </div>
        
         

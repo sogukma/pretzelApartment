@@ -1,0 +1,50 @@
+<?php
+
+require("fpdf.php");
+$db = new PDO('mysql:host=localhost;dbname=login','root','');
+$userId = $_GET['id'];
+
+
+
+class myPDF extends FPDF{
+    function header(){
+        
+        $this->SetFont('Arial','B',14);
+        $this->Cell(276,5,'Pretzel Real Estate Inc.',0,0,'C');
+        $this->Ln();
+        $this->SetFont('Times','',12);
+        $this->Cell(276,10,'Rechnung',0,0,'C');
+        $this->Ln(20);
+    }
+    function headerTable(){
+        $this->SetFont('Times','B',12);
+        $this->Cell(20,10,'ID',1,0,'C');
+        $this->Cell(40,10,'Rechnungtyp',1,0,'C');
+        $this->Cell(40,10,'Status',1,0,'C');
+        $this->Cell(40,10,'Betrag',1,0,'C');
+        $this->Cell(36,10,'User-ID',1,0,'C');
+        $this->Ln();
+    }
+    function viewTable($db){
+        $this->SetFont('Times','',12);
+        $stmt = $db->query("select * from rechnung WHERE fk_userid = '$userId'");
+        while($data = $stmt->fetch(PDO::FETCH_OBJ)){
+            $this->Cell(20,10,$data->id,1,0,'L');
+            $this->Cell(40,10,$data->rechnungstyp,1,0,'L');
+            $this->Cell(40,10,$data->status,1,0,'L');
+            $this->Cell(40,10,$data->betrag,1,0,'L');
+            $this->Cell(36,10,$data->fk_userId,1,0,'L');
+            $this->Ln();
+        }
+        
+    }
+}
+$pdf = new myPDF();
+$pdf->AliasNbPages();
+$pdf->AddPage('L','A4',0);
+$pdf->headerTable();
+$pdf->viewTable($db);
+$pdf->Output();
+
+?>
+
