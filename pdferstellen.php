@@ -1,7 +1,7 @@
 <?php
 
 require("fpdf.php");
-$db = new PDO('mysql:host=localhost;dbname=login','root','');
+$db = new PDO('mysql:host=eu-cdbr-west-02.cleardb.net;dbname=heroku_264d8c0ac2b1d8d','b46bd03f9f4fdf','cb61f804');
 $userId = $_GET['id'];
 
 

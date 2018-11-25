@@ -19,13 +19,13 @@ class DAO
  
  
  function __construct() {
-    $this->benutzer="root";
-    $this->passwort="";
-    $this->dbname="login";
+    $this->benutzer="b46bd03f9f4fdf";
+    $this->passwort="cb61f804";
+    $this->dbname="heroku_264d8c0ac2b1d8d";
  }
 function connect() {
 
-    $this->link = mysqli_connect("localhost", $this->benutzer, $this->passwort, $this->dbname);
+    $this->link = mysqli_connect("eu-cdbr-west-02.cleardb.net", $this->benutzer, $this->passwort, $this->dbname);
     mysqli_query($this->link, "SET NAMES 'utf-8'");
     
     

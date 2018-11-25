@@ -93,7 +93,7 @@
         <div >
         <h4>Neue Rechnung hinzufügen:</h4>
         
-    <form method="post" action="manageInvoices.php?id=<?=$_SESSION['id']?>">
+    <form method="post">
        
         <div class="form-group row"> 
             <label for="betrag" class="col-sm-10 col-form-label">Betrag</label>
@@ -119,7 +119,9 @@
           <input name="submit" class="btn btn-primary" type="submit">
           <input class="btn" type="reset"><br/>
     </form>
-        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="get" target="_blank">
+        <?php echo $_GET['id']; 
+        ?>
+        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="get">
             <input class="btn" type="submit" value="PDF">
             
         </form>
