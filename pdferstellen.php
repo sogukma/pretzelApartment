@@ -25,9 +25,9 @@ class myPDF extends FPDF{
         $this->Cell(36,10,'User-ID',1,0,'C');
         $this->Ln();
     }
-    function viewTable($db){
+    function viewTable($db, $userId){
         $this->SetFont('Times','',12);
-        $stmt = $db->query("select * from rechnung WHERE fk_userid = '$userId'");
+        $stmt = $db->query("select * from rechnung WHERE fk_userId = '$userId'");
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(20,10,$data->id,1,0,'L');
             $this->Cell(40,10,$data->rechnungstyp,1,0,'L');
@@ -43,7 +43,7 @@ $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('L','A4',0);
 $pdf->headerTable();
-$pdf->viewTable($db);
+$pdf->viewTable($db, $userId);
 $pdf->Output();
 
 ?>

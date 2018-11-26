@@ -121,7 +121,7 @@
     </form>
         <?php echo $_GET['id']; 
         ?>
-        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="get">
+        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="post">
             <input class="btn" type="submit" value="PDF">
             
         </form>
