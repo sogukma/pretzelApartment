@@ -97,7 +97,6 @@ function insert($name, $password, $benutzertyp)
 
 function insertInvoice($userId, $rechnungstyp, $status, $betrag)
 {
-    echo "persistence here: ".$userId;
     $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
     VALUES ('$rechnungstyp', '$status', '$betrag', '$userId')";
 

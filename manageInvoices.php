@@ -12,23 +12,9 @@
         $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
-        $_SESSION['id'] = $_GET['id'];
+        $_SESSION['user_id'] = $_GET['user_id'];
             
-      
-        function insertInvoice()
-        {
- 
-            $userId = $_GET['id'];
-            echo 'not persistence here:'.$userId;
-            $rechnungstyp = $_POST["rechnungstyp"];
-            $betrag = $_POST["betrag"];
-            $_SESSION['dbconnection']->insertInvoice($userId, $rechnungstyp, "offen", $betrag);
-        }
-        
-        if(isset($_POST['submit']))
-        {
-           insertInvoice();
-        } 
+
         ?>
 
 <html>
@@ -36,7 +22,9 @@
         <script src="assets/js/jquery.min.js"></script>
      <!--   <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
     <!--    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -53,24 +41,7 @@
               var fkUserId = $(this).parent().parent().find(".fkUserId").html();
               window.open("updateInvoice.php?invoice_id="+ encodeURIComponent(invoiceId)+"&fk_user_id="+encodeURIComponent(fkUserId));
               
-  
-              
-              /*
-               var data = $(this).parent().parent().attr('id');
-               var fkUserId = $(this).parent().parent().find(".fkUserId").html();
-               console.log(fkUserId);
-                var thisform = $(this);
-                $.ajax({
-                 type: "POST",
-                 url: "updateInvoice.php",
-                 data: { action2: data, action3: fkUserId },               
-                success: function(msg) { 
-                      thisform.parent().append(msg);
-                      //alert(msg);
 
-                        }
-             
-                });*/
             });
             
                 
@@ -79,10 +50,10 @@
         </script>
     </head>
     <body>
-       
+       <div class="content">
 
         <?php
-          $ergebnis = $_SESSION['dbconnection']->selectUsersNameById( $_SESSION['id'] );
+          $ergebnis = $_SESSION['dbconnection']->selectUsersNameById( $_SESSION['user_id'] );
 
           while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
           {
@@ -102,7 +73,7 @@
                         echo '<th scope="col">'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
                     echo '</tr><thead>';
-                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['id']);
+                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['user_id']);
                 
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
@@ -114,45 +85,22 @@
          
         </table>
             </div>
-        <div >
-        <h4>Neue Rechnung hinzufügen:</h4>
-        
-    <form method="post">
-       
-        <div class="form-group row"> 
-            <label for="betrag" class="col-sm-10 col-form-label">Betrag</label>
-            <div class="col-sm-10">
-                 <input class="form-control" id="betrag" name="betrag" type="text" required=""/><br/>
-             </div>
-        </div>
-        
-        
-        
-          <div class="form-group">
-            <label for="rechnungstyp">Rechnungstyp</label>
-            <select class="form-control" name="rechnungstyp" id="rechnungstyp">
-              <option>Heizung</option>
-              <option>Miete</option>
-              <option>Reparatur</option>
-              <option>Wasser</option>
-              <option>Öl</option>s
-              <option>Abwartleistung</option>
-            </select>
-          </div>
-        
-          <input name="submit" class="btn btn-primary" type="submit">
-          <input class="btn" type="reset"><br/>
-    </form>
-        <?php echo $_GET['id']; 
-        ?>
-        <form action="pdferstellen.php?id=<?=$_GET['id']?>" method="post">
-            <input class="btn" type="submit" value="PDF">
+           <br/>
+            <form action="pdferstellen.php?fk_user_id=<?=$_GET['user_id']?>" method="post">
+            <input class="btn" type="submit" value="Rechnung als PDF anzeigen">
             
         </form>
+ 
+           
+        <form action="insertInvoice.php?fk_user_id=<?=$_GET['user_id']?>" method="post">
+            <input class="btn" type="submit" value="Rechnung hinzufügen" />
+        </form>
+
+    
         
-        </div>
+       
 
-
+       </div>
     </body>
 </html>
 

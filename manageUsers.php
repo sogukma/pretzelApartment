@@ -58,7 +58,7 @@
    
           $('.rechnung').click(function() {
               data = $(this).parent().parent().attr('id');
-              window.open("manageInvoices.php?id="+ encodeURIComponent(data));
+              window.open("manageInvoices.php?user_id="+ encodeURIComponent(data));
 
             });
 
