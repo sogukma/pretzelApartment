@@ -3,15 +3,15 @@
     include './DAO.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
         $sh->isCorrectPape("abwart");
         
         $dbc = DAO::Instance();
         $dbc->connect();
-        $_SESSION['dbconnection'] = $dbc;
 
-if (isset($_POST['action'])) {
-    $id = $_POST['action'];
-    $_SESSION['dbconnection']->delete($id);
+if (isset($_GET['user_id'])) {
+    $userId = $_GET['user_id'];
+    $dbc->delete($userId);
 }
 
- header("Location:updateUsers.php");
+ header("Location:manageUsers.php");

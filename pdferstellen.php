@@ -1,4 +1,10 @@
 <?php
+ include 'sessionHandling.php';
+    $sh = sessionHandling::Instance();
+        $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
+        $sh->isCorrectPape("abwart");
+
 
 require("fpdf.php");
 $db = new PDO('mysql:host=eu-cdbr-west-02.cleardb.net;dbname=heroku_264d8c0ac2b1d8d','b46bd03f9f4fdf','cb61f804');

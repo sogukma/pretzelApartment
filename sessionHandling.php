@@ -18,7 +18,11 @@ class sessionHandling
      
  }
     
-    
+public function regenerate_session_id()
+{
+    session_regenerate_id();
+}
+ 
 public function open_session() {
      session_start();
      $_SESSION['is_open'] = TRUE;

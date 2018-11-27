@@ -4,13 +4,30 @@
         include './TemplateView.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
         $sh->isCorrectPape("abwart");
         
         $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
             
-?>
+
+      
+        function insertUser()
+        {
+ 
+            $name = $_POST["nname"];
+            $password = $_POST["password"];
+            $benutzertyp = $_POST["benutzertyp"];
+            $_SESSION['dbconnection']->insert($name, $password, $benutzertyp);
+            header("Location:manageUsers.php"); 
+        }
+        
+        if(isset($_POST['submit']))
+        {
+           insertUser();
+        } 
+        ?>
 <html>
     <head>
         <script src="assets/js/jquery.min.js"></script>
@@ -18,52 +35,31 @@
         <script type='text/javascript'>
             $(document).ready(function(){
                $('.delete').click(function() {
+                   
+                var data = $(this).parent().parent().attr('id');
+                window.open("deleteUser.php?user_id="+ encodeURIComponent(data));
+              
+              /*
                var data = $(this).parent().parent().attr('id');
                 $.ajax({
                  type: "POST",
                  url: "deleteUser.php",
-                 data: { action: data }
-               }).done(function() {
-                 window.location.reload();   
-                 
-               });    
-
+                 data: { user_id: data }
+               });   
+                */
             });
                    
           $('.update').click(function() {
-               data = $(this).parent().parent().attr('id');
-                var thisform = $(this);
-                $.ajax({
-                 type: "POST",
-                 url: "updateUser.php",
-                 data: { action: data },               
-                success: function(msg) { 
-                        thisform.parent().append(msg);
-                   
-                        }
-             
-                });
+              data = $(this).parent().parent().attr('id');
+              window.open("updateUser.php?user_id="+ encodeURIComponent(data));
+              
             });
    
    
           $('.rechnung').click(function() {
               data = $(this).parent().parent().attr('id');
               window.open("manageInvoices.php?id="+ encodeURIComponent(data));
-           //   window.location = "http://localhost/first.php?q=" + encodeURIComponent(checkB) + "&p=" + encodeURIComponent(tableName);
-              /*
-               data = $(this).parent().parent().attr('id');
-                var thisform = $(this);
-                $.ajax({
-                 type: "POST",
-                 url: "manageInvoices.php",
-                 data: { action: data },               
-                success: function(msg) { 
-                        thisform.parent().append(msg);
-                   
-                        }
-             
-                });
-                */
+
             });
 
                 
@@ -102,28 +98,7 @@
                 ?>
          
         </table>
-        
-        <?php
-      
-        function insertUser()
-        {
- 
-            $name = $_POST["nname"];
-            $password = $_POST["password"];
-            $benutzertyp = $_POST["benutzertyp"];
-            $_SESSION['dbconnection']->insert($name, $password, $benutzertyp);
-            if(isset($_POST['submit']))
-            {
-               echo "hello ".$_POST["benutzertyp"];
-            } 
-        }
-        
-        if(isset($_POST['submit']))
-        {
-           insertUser();
-        } 
-        ?>
-        
+          
 
     </body>
 </html>

@@ -3,15 +3,17 @@
     include './DAO.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
         $sh->isCorrectPape("abwart");
         
         $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
+        
 
-if (isset($_POST['action'])) {
-    echo $_POST['action'];
-    $_SESSION['user_id'] = $_POST['action'];
+if (isset($_GET['user_id'])) {
+    echo $_GET['user_id'];
+    $_SESSION['user_id'] = $_GET['user_id'];
 }
 else
 {
@@ -36,7 +38,7 @@ else
         } 
 
 ?>
-    <form method="post" action="update.php">
+    <form method="post" action="updateUser.php">
         Name:<input name="nname" type="text" required/><br/>
         Password:<input name="password" type="password" required=""/><br/>
         Benutzername:

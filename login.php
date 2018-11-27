@@ -5,6 +5,7 @@ include './DAO.php';
 $sh = sessionHandling::Instance();
 // vorhandene session übernehmen
 $sh->open_session();
+$sh->regenerate_session_id();
 
 if(!$sh->session_is_open())
 {

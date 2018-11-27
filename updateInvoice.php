@@ -4,18 +4,17 @@
     include './DAO.php';
     $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
         $sh->isCorrectPape("abwart");
         
         $dbc = DAO::Instance();
         $dbc->connect();
         $_SESSION['dbconnection'] = $dbc;
 
-if (isset($_POST['action2'])) {
+if (isset($_GET['invoice_id'])) {
   
-    echo $_POST['action2'];
-    echo "das ist fk_userId". $_POST['action3'];
-    $_SESSION['user_id_2'] = $_POST['action2'];
-    $_SESSION['fk_user_id'] = $_POST['action3'];
+    $_SESSION['invoice_id'] = $_GET['invoice_id'];
+    $_SESSION['fk_user_id'] = $_GET['fk_user_id'];
 }
 else
 {
@@ -28,9 +27,9 @@ else
         
             $status = $_POST["status"];
             
-             echo $status."".$_SESSION['user_id_2']."".$_SESSION['fk_user_id'];
+             echo $status."".$_SESSION['invoice_id']."".$_SESSION['fk_user_id'];
              $dbc = DAO::Instance();
-              $dbc->updateInvoice($_SESSION['user_id_2'],$status, $_SESSION['fk_user_id']);
+              $dbc->updateInvoice($_SESSION['invoice_id'],$status, $_SESSION['fk_user_id']);
             
             header("Location:manageUsers.php");
     };

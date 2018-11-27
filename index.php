@@ -3,6 +3,7 @@
         include './sessionHandling.php';
         $sh = sessionHandling::Instance();
         $sh->open_session();
+        $sh->regenerate_session_id();
         //session_start() übernimmt eine bestehende session
         
         $sh->destroy_session(); //löschen aller session variablen

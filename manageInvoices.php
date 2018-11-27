@@ -6,6 +6,7 @@
         include './TemplateView.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
+        $sh->regenerate_session_id();
         $sh->isCorrectPape("abwart");
         
         $dbc = DAO::Instance();
@@ -13,7 +14,23 @@
         $_SESSION['dbconnection'] = $dbc;
         $_SESSION['id'] = $_GET['id'];
             
-?>
+      
+        function insertInvoice()
+        {
+ 
+            $userId = $_GET['id'];
+            echo 'not persistence here:'.$userId;
+            $rechnungstyp = $_POST["rechnungstyp"];
+            $betrag = $_POST["betrag"];
+            $_SESSION['dbconnection']->insertInvoice($userId, $rechnungstyp, "offen", $betrag);
+        }
+        
+        if(isset($_POST['submit']))
+        {
+           insertInvoice();
+        } 
+        ?>
+
 <html>
     <head>
         <script src="assets/js/jquery.min.js"></script>
@@ -32,6 +49,13 @@
    
           $('.updateInvoice').click(function() {
               
+              var invoiceId = $(this).parent().parent().attr('id');
+              var fkUserId = $(this).parent().parent().find(".fkUserId").html();
+              window.open("updateInvoice.php?invoice_id="+ encodeURIComponent(invoiceId)+"&fk_user_id="+encodeURIComponent(fkUserId));
+              
+  
+              
+              /*
                var data = $(this).parent().parent().attr('id');
                var fkUserId = $(this).parent().parent().find(".fkUserId").html();
                console.log(fkUserId);
@@ -46,7 +70,7 @@
 
                         }
              
-                });
+                });*/
             });
             
                 
@@ -127,27 +151,7 @@
         </form>
         
         </div>
-       
-        
-        
-        <?php
-      
-        function insertInvoice()
-        {
- 
-            $userId = $_GET['id'];
-            echo 'not persistence here:'.$userId;
-            $rechnungstyp = $_POST["rechnungstyp"];
-            $betrag = $_POST["betrag"];
-            $_SESSION['dbconnection']->insertInvoice($userId, $rechnungstyp, "offen", $betrag);
-        }
-        
-        if(isset($_POST['submit']))
-        {
-           insertInvoice();
-        } 
-        ?>
-        
+
 
     </body>
 </html>
