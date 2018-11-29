@@ -59,7 +59,7 @@
      
      <div class="container center_div">
    
-     <div class="insertForm rounded">
+     <div class="insertForm rounded container">
     <h4>Benutzer hinzufügen</h4>
     
     <form method="post">

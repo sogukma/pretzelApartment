@@ -12,7 +12,7 @@
         
 
 if (isset($_GET['user_id'])) {
-    echo $_GET['user_id'];
+  
     $_SESSION['user_id'] = $_GET['user_id'];
 }
 else
@@ -38,11 +38,66 @@ else
         } 
 
 ?>
-    <form method="post" action="updateUser.php">
-        Name:<input name="nname" type="text" required/><br/>
-        Password:<input name="password" type="password" required=""/><br/>
-        Benutzername:
-          <input type="radio" name="benutzertyp" value="mieter" checked> Mieter
-          <input type="radio" name="benutzertyp" value="abwart"> Abwart<br/>
-          <input name="submit" type="submit"><input type="reset"><br/>
-    </form>
+<html>
+    <head>
+               <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+        <!------ Include the above in your HEAD tag ---------->
+
+
+        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="Header-Picture.css">
+        <link rel="stylesheet" href="style.css">
+
+
+    </head>
+    <body>
+             <nav class="navbar navbar-default" id="navigation-purple">
+        <div class="container">
+            <a href="#"><img class="img-responsive img-circle avatar" src="pictures/pretzelIcon.png" alt="Avatar"></a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        <h4>Benutzerangeben ändern</h4>
+            <div class="insertForm rounded container">
+            <form method="post" action="updateUser.php">
+                        <div class="form-group row"> 
+            <label for="nname" class="col-sm-10 col-form-label">Name</label>
+            <div class="col-sm-10">
+                 <input class="form-control" id="nname" name="nname" type="text" required="true"/><br/>
+             </div>
+        </div>
+         <div class="form-group row"> 
+            <label for="password" class="col-sm-10 col-form-label">Password</label>
+            <div class="col-sm-10">
+                 <input class="form-control" id="password" name="password" type="password" required="true"/><br/>
+             </div>
+        </div> 
+          <div class="form-group">
+            <label for="benutzertyp">Benutzertyp</label>
+            <select class="form-control" name="benutzertyp" id="benutzertyp">
+              <option checked value="mieter">Mieter</option>
+              <option value="abwart">Abwart</option>
+
+            </select>
+        </div> 
+
+              <input name="submit" class="btn btn-primary" type="submit"><input class="btn" type="reset"><br/>
+        </form>
+    </div>
+        
+    </body>
+</html>
