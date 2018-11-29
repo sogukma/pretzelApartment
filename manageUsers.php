@@ -13,51 +13,40 @@
             
 
       
-        function insertUser()
-        {
  
-            $name = $_POST["nname"];
-            $password = $_POST["password"];
-            $benutzertyp = $_POST["benutzertyp"];
-            $_SESSION['dbconnection']->insert($name, $password, $benutzertyp);
-            header("Location:manageUsers.php"); 
-        }
-        
-        if(isset($_POST['submit']))
-        {
-           insertUser();
-        } 
         ?>
 <html>
     <head>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+ 
+ 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+        <!------ Include the above in your HEAD tag ---------->
+
+
+        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="Header-Picture.css">
         <script type='text/javascript'>
             $(document).ready(function(){
                $('.delete').click(function() {
                    
-                var data = $(this).parent().parent().attr('id');
+                var data = $(this).parent().parent().parent().attr('id');
                 window.open("deleteUser.php?user_id="+ encodeURIComponent(data));
               
-              /*
-               var data = $(this).parent().parent().attr('id');
-                $.ajax({
-                 type: "POST",
-                 url: "deleteUser.php",
-                 data: { user_id: data }
-               });   
-                */
+   
             });
                    
           $('.update').click(function() {
-              data = $(this).parent().parent().attr('id');
+              data = $(this).parent().parent().parent().attr('id');
               window.open("updateUser.php?user_id="+ encodeURIComponent(data));
               
             });
    
    
           $('.rechnung').click(function() {
-              data = $(this).parent().parent().attr('id');
+              data = $(this).parent().parent().parent().attr('id');
               window.open("manageInvoices.php?user_id="+ encodeURIComponent(data));
 
             });
@@ -68,38 +57,76 @@
         </script>
     </head>
     <body>
-   
-    <form method="post" action="manageUsers.php">
-        Name:<input name="nname" type="text" required/><br/>
-        Password:<input name="password" type="password" required=""/><br/>
-        Benutzername:
-          <input type="radio" name="benutzertyp" value="mieter" checked> Mieter
-          <input type="radio" name="benutzertyp" value="abwart"> Abwart<br/>
-          <input name="submit" type="submit"><input type="reset"><br/>
-    </form>
-        <table>
+   <!-- Der Nav-Bar wurde von hier entnommen: https://demo.tutorialzine.com/2016/09/freebie-5-beautiful-bootstrap-headers/#Header-Picture-->
+           <nav class="navbar navbar-default" id="navigation-purple">
+        <div class="container">
+            <a href="#"><img class="img-responsive img-circle avatar" src="pictures/pretzelIcon.png" alt="Avatar"></a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+     
+        
+        <!-- The design of follwing table is based in this work: https://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable-->
+        
+        <div class="container">
+	<div class="row">
+		
+        
+        <div class="col-md-12">
+        <div class="table-responsive">
+
+        
+        <table class="table table-bordred table-striped">
             
                 <?php 
                     $ergebnis = $_SESSION['dbconnection']->selectUsersColumnNames();
-                    echo '<tr>';
+                    echo '<thead>';
                        while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
-                    echo '</tr>';
+                    echo '<th>Löschen</th><th>Bearbeiten</th><th>Rechnung einsehen</th></thead><tbody>';
                      $ergebnis = $_SESSION['dbconnection']->selectUsers();
                 
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                      
-                      echo '<tr id="'.$zeile[0].'"><td>'. TemplateView::noHTML($zeile[0]).'</td><td>'.TemplateView::noHTML($zeile[1]) .'</td><td>'.TemplateView::noHTML($zeile[2]) .'</td><td>'.TemplateView::noHTML($zeile[3]) .'</td><td><button  class="delete">delete</button></td><td><button class="update">update</button></td><td><button class="rechnung">Eechnung einsehen</button></td></tr>';
+                      echo '<tr id="'.$zeile[0].'">'
+                              . '<th scope="row">'. TemplateView::noHTML($zeile[0]).'</th>'
+                              . '<td>'.TemplateView::noHTML($zeile[1]) .'</td>'
+                              . '<td>'.TemplateView::noHTML($zeile[2]) .'</td>'
+                              . '<td>'.TemplateView::noHTML($zeile[3]) .'</td>'   
+                              . '<td><p data-placement="top" data-toggle="tooltip" title="Löschen"><button class="btn btn-danger btn-xs delete" data-title="Löschen" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>'
+                              . '<td><p data-placement="top" data-toggle="tooltip" title="Bearbeiten"><button class="btn btn-primary btn-xs update" data-title="Bearbeiten" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>'
+                              . '<td><p data-placement="top" data-toggle="tooltip" title="Rechnung einsehen"><button class="btn btn-primary btn-xs rechnung" data-title="Rechnung einsehen" data-toggle="modal" ><span class="glyphicon glyphicon-align-left"></span></button></p></td>';
+                      
+                     
                      
                      }
+                    echo '</tbody>';
                 ?>
          
         </table>
-          
+        <form action="insertUser.php" method="post">
+            <input class="btn" type="submit" value="Benutzer hinzufügen" />
+        </form>
+        </div></div></div></div>
+
 
     </body>
 </html>
+
+
+
 

@@ -1,17 +1,9 @@
-
-.table th {
-    text-align: center;
-
-     padding: 0px 0px 0px 50px;
-
+.center_div{
+    margin: 0 auto;
+    width:80% /* value of your choice which suits your alignment */
 }
 
-.table {
-    border-radius: 5px;
-    width: 1000px;
-    float: none;
 
-}
 
 .content{
     border: 50px solid white;

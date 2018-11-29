@@ -163,7 +163,7 @@ function selectInvoices(){
 function selectUsersColumnNames()
 {
 
-        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'login' AND TABLE_NAME = 'users'";
+        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'users'";
     
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
@@ -176,7 +176,7 @@ function selectUsersColumnNames()
 function selectInvoicesColumnNames()
 {
 
-        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'login' AND TABLE_NAME = 'rechnung'";
+        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'rechnung'";
     
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
