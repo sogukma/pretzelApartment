@@ -68,7 +68,7 @@
         <div class="form-group row"> 
             <label for="betrag" class="col-sm-10 col-form-label">Betrag</label>
             <div class="col-sm-10">
-                 <input class="form-control" id="betrag" name="betrag" type="text" required=""/><br/>
+                 <input class="form-control" id="betrag" name="betrag" type="text" required="true" pattern="^[0-9]+$"/><br/>
              </div>
         </div>
         

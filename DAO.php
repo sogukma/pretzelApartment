@@ -38,9 +38,20 @@ function delete($id){
      if (mysqli_query($this->link, $abfrage)) {
         return mysqli_query($this->link, $abfrage);
     } else {
+        echo "<script type='text/javascript'>alert('Fehler: Benutzer hat noch Rechnungen!')</script>";
+    }
+}
+
+function deleteInvoice($id){
+       $abfrage="delete from rechnung where id='$id'";
+    
+     if (mysqli_query($this->link, $abfrage)) {
+        return mysqli_query($this->link, $abfrage);
+    } else {
         echo "Error: ";
     }
 }
+
 
 function update($id,$name, $password, $benutzertyp){
        $abfrage="update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";

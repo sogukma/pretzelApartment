@@ -36,17 +36,13 @@
                
                if($(this).find(".status").html() == "offen")
                {
-               totalCosts += parseFloat($(this).find(".cost").html());
+               totalCosts += parseFloat($(this).find(".cost").attr("name"));
                 }
               
-         /*       var $this = $(this .c);
-                var i = i += $this.html() ;
-                alert(i);
-                i.remove(); */
-  
-          });
-          $('#totalcosts').append(totalCosts);
-          $('.updateInvoice').click(function() {
+            });
+            $('#totalcosts').append(totalCosts);
+        
+            $('.updateInvoice').click(function() {
               
               var invoiceId = $(this).parent().parent().parent().attr('id');
               var fkUserId = $(this).parent().parent().parent().find(".fkUserId").html();
@@ -54,7 +50,13 @@
               
 
             });
-            
+          $('.deleteInvoice').click(function() {
+              
+              var invoiceId = $(this).parent().parent().parent().attr('id');
+              window.open("deleteInvoice.php?invoice_id="+ encodeURIComponent(invoiceId));
+              
+
+            });    
             
                 
                 
@@ -108,7 +110,7 @@
                      {        
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
-                        echo '<th>Status ändern</th>';
+                        echo '<th>Löschen</th><th>Status ändern</th>';
                     echo '</thead><tbody>';
                      $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['user_id']);
                 
@@ -119,8 +121,9 @@
                         . '<th scope="row">'. TemplateView::noHTML($zeile[0]).'</th>'
                         . '<td>'.TemplateView::noHTML($zeile[1]) .'</td>'
                         . '<td class="status">'.TemplateView::noHTML($zeile[2]) .'</td>'
-                        . '<td class="cost">'.TemplateView::noHTML($zeile[3]) .'</td>'
+                        . '<td name="'.TemplateView::noHTML($zeile[3]).'" class="cost">CHF '.TemplateView::noHTML($zeile[3]).'</td>'
                         . '<td id="fk'.TemplateView::noHTML($zeile[4]).'" class="fkUserId">'.TemplateView::noHTML($zeile[4]) .'</td>'
+                        . '<td><p data-placement="top" data-toggle="tooltip" title="Löschen"><button class="btn btn-danger btn-xs deleteInvoice" data-title="Löschen" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>'
                         . '<td><p data-placement="top" data-toggle="tooltip" title="Bearbeiten"><button class="btn btn-primary btn-xs updateInvoice" data-title="Bearbeiten" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>'    
                         . '</tr>';
                         

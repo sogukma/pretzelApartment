@@ -97,7 +97,7 @@
                      {        
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
-                    echo '<th>Löschen</th><th>Bearbeiten</th><th>Rechnung einsehen</th></thead><tbody>';
+                    echo '<th>Löschen</th><th>Bearbeiten</th><th>Rechnungen einsehen</th></thead><tbody>';
                      $ergebnis = $_SESSION['dbconnection']->selectUsers();
                 
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
@@ -110,7 +110,7 @@
                               . '<td>'.TemplateView::noHTML($zeile[3]) .'</td>'   
                               . '<td><p data-placement="top" data-toggle="tooltip" title="Löschen"><button class="btn btn-danger btn-xs delete" data-title="Löschen" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>'
                               . '<td><p data-placement="top" data-toggle="tooltip" title="Bearbeiten"><button class="btn btn-primary btn-xs update" data-title="Bearbeiten" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>'
-                              . '<td><p data-placement="top" data-toggle="tooltip" title="Rechnung einsehen"><button class="btn btn-primary btn-xs rechnung" data-title="Rechnung einsehen" data-toggle="modal" ><span class="glyphicon glyphicon-align-left"></span></button></p></td>';
+                              . '<td><p data-placement="top" data-toggle="tooltip" title="Rechnungen einsehen"><button class="btn btn-primary btn-xs rechnung" data-title="Rechnung einsehen" data-toggle="modal" ><span class="glyphicon glyphicon-align-left"></span></button></p></td>';
                       
                      
                      
