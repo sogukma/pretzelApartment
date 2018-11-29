@@ -31,7 +31,21 @@
         
         <script type='text/javascript'>
          $(document).ready(function(){
-   
+          var totalCosts = 0;
+          $('#manageInvoices tr').each( function(){
+               
+               if($(this).find(".status").html() == "offen")
+               {
+               totalCosts += parseFloat($(this).find(".cost").html());
+                }
+              
+         /*       var $this = $(this .c);
+                var i = i += $this.html() ;
+                alert(i);
+                i.remove(); */
+  
+          });
+          $('#totalcosts').append(totalCosts);
           $('.updateInvoice').click(function() {
               
               var invoiceId = $(this).parent().parent().parent().attr('id');
@@ -40,6 +54,7 @@
               
 
             });
+            
             
                 
                 
@@ -66,14 +81,7 @@
     </nav>
        <div class="content">
 
-        <?php
-          $ergebnis = $_SESSION['dbconnection']->selectUsersNameById( $_SESSION['user_id'] );
 
-          while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
-          {
-             echo '<h3 value="'.TemplateView::noHTML($zeile[0]).'">Rechnungen von '.TemplateView::noHTML($zeile[0]).'</h3>';
-          }
-        ?>
          
         <div>
         <div class="container">
@@ -82,8 +90,15 @@
         
         <div class="col-md-12">
         <div class="table-responsive">    
-        
-        <table class="table table-bordred table-striped">
+                <?php
+          $ergebnis = $_SESSION['dbconnection']->selectUsersNameById( $_SESSION['user_id'] );
+
+          while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
+          {
+             echo '<h3 value="'.TemplateView::noHTML($zeile[0]).'">Rechnungen von '.TemplateView::noHTML($zeile[0]).'</h3>';
+          }
+        ?>
+        <table id="manageInvoices" class="table table-bordred table-striped">
             
                 <?php 
                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesColumnNames();
@@ -103,34 +118,31 @@
                       echo '<tr id="'.TemplateView::noHTML($zeile[0]).'">'
                         . '<th scope="row">'. TemplateView::noHTML($zeile[0]).'</th>'
                         . '<td>'.TemplateView::noHTML($zeile[1]) .'</td>'
-                        . '<td>'.TemplateView::noHTML($zeile[2]) .'</td>'
-                        . '<td>'.TemplateView::noHTML($zeile[3]) .'</td>'
+                        . '<td class="status">'.TemplateView::noHTML($zeile[2]) .'</td>'
+                        . '<td class="cost">'.TemplateView::noHTML($zeile[3]) .'</td>'
                         . '<td id="fk'.TemplateView::noHTML($zeile[4]).'" class="fkUserId">'.TemplateView::noHTML($zeile[4]) .'</td>'
                         . '<td><p data-placement="top" data-toggle="tooltip" title="Bearbeiten"><button class="btn btn-primary btn-xs updateInvoice" data-title="Bearbeiten" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>'    
                         . '</tr>';
-                     
+                        
                      }
+                     echo '<tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>';
+                     echo '<tr><th scope="row">Total Offene Kosten</th><td></td><td></td><td id="totalcosts">CHF </td><td></td><td></td></tr>';
                      echo '</tbody>';
                 ?>
          
         </table>
-        </div></div></div></div>
-            </div>
-           <br/>
             <form action="pdferstellen.php?fk_user_id=<?=$_GET['user_id']?>" method="post">
             <input class="btn" type="submit" value="Rechnung als PDF anzeigen">
-            
-        </form>
- 
-           
-        <form action="insertInvoice.php?fk_user_id=<?=$_GET['user_id']?>" method="post">
+             </form>
+              <form action="insertInvoice.php?fk_user_id=<?=$_GET['user_id']?>" method="post">
             <input class="btn" type="submit" value="Rechnung hinzufügen" />
         </form>
 
-    
-        
-       
-
+        </div></div></div></div>
+            </div>
+           <br/>
+            
+      
        </div>
     </body>
 </html>

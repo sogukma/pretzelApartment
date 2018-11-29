@@ -73,7 +73,7 @@ else
         </div>
     </nav>
             <div class="insertForm rounded container">
-                <h4>Rechnungsstatus ändern</h4>
+                <h3>Rechnungsstatus ändern</h3>
     <form method="post" action="updateInvoice.php">
         
               <div class="form-group">

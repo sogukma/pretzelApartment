@@ -75,7 +75,7 @@
             </div>
         </div>
     </nav>
-     
+
         
         <!-- The design of follwing table is based in this work: https://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable-->
         
@@ -86,7 +86,8 @@
         <div class="col-md-12">
         <div class="table-responsive">
 
-        
+           <h3>Benutzerübersicht</h3>
+           
         <table class="table table-bordred table-striped">
             
                 <?php 

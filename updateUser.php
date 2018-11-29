@@ -71,8 +71,9 @@ else
             </div>
         </div>
     </nav>
-        <h4>Benutzerangeben ändern</h4>
+      
             <div class="insertForm rounded container">
+                  <h3>Benutzerangeben ändern</h3>
             <form method="post" action="updateUser.php">
                         <div class="form-group row"> 
             <label for="nname" class="col-sm-10 col-form-label">Name</label>

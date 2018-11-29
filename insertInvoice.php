@@ -61,7 +61,7 @@
         
     <div class="insertForm rounded container">
         
-        <h4>Neue Rechnung hinzufügen:</h4>
+        <h3>Neue Rechnung hinzufügen:</h3>
         
     <form method="post">
        
