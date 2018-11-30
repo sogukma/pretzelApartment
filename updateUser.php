@@ -1,4 +1,13 @@
 <?php
+/**
+ * updateUser.php
+ *
+ * Stellt ein Formular für das Ändern eines Benutzers zur Verfügung.
+ * Beim Absenden des Formular wird in der Datenbank die entsprechende Funktion aufgerufen.
+ *
+ * @category   Controller
+ * @author     Malik
+ */
      include 'sessionHandling.php';
     include './DAO.php';
         $sh = sessionHandling::Instance();

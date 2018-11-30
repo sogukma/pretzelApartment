@@ -1,9 +1,17 @@
 <?php
+/**
+ * DAO.php
+ *
+ * Objektklasse für Datenbankzugriffe
+ *
+ * @category   Model
+ * @author     Malik
+ */
 
 class DAO
 {
  private $link;
- private $benutzer; //später in ein db.inc.php
+ private $benutzer; 
  private $passwort;
  private $dbname;
  
@@ -205,6 +213,3 @@ function iterateResult($ergebnis)
 
     }
     
-
-
-/* quelle https://stackoverflow.com/questions/4478661/getter-and-setter */

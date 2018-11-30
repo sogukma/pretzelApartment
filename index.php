@@ -1,11 +1,18 @@
 
         <?php
+        /**
+        * index.php
+        *
+        * Startseite: hier gibt der Benutzer Name und Passwort ein 
+        * und bestätigt seine eingeben mit Klick auf den "Sign-In"-Button.
+        *
+        * @category   View
+        * @author     Malik
+        */
         include './sessionHandling.php';
         $sh = sessionHandling::Instance();
         $sh->open_session();
         $sh->regenerate_session_id();
-        //session_start() übernimmt eine bestehende session
-        
         $sh->destroy_session(); //löschen aller session variablen
         session_unset();
         

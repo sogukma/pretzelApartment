@@ -1,4 +1,13 @@
 <?php
+/**
+ * deleteInvoice.php
+ *
+ * Nimmt Löschanferoderungen für Rechnungen entgegen und 
+ * ruft in der Datenbank die entsprechende Funktion auf.
+ *
+ * @category   Controller
+ * @author     Malik
+ */
      include 'sessionHandling.php';
     include './DAO.php';
         $sh = sessionHandling::Instance();

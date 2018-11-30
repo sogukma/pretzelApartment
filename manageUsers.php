@@ -1,4 +1,13 @@
 <?php
+/**
+ * manageUsers.php
+ *
+ * Ansichtsseite zum Verwalten von Benutzern.
+ * Von hier aus können Benutzer angesehen, erstellt, bearbeitet und gelöscht werden.
+ *
+ * @category   View, Model
+ * @author     Malik
+ */
         include 'sessionHandling.php';
         include './DAO.php';
         include './TemplateView.php';

@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * insertUser.php
+ *
+ * Stellt ein Formular für das Hinzufügen neuer Benutzer zur Verfügung.
+ * Beim Absenden des Formular wird in der Datenbank die entsprechende Funktion aufgerufen.
+ *
+ * @category   Controller
+ * @author     Malik
+ */
     function insertUser()
     {
         include 'sessionHandling.php';

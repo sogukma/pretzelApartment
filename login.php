@@ -1,4 +1,14 @@
 <?php
+/**
+ * login.php
+ *
+ * Hier werden die im index.php abgesendeten Logindaten auf Richtigkeit überprüft.
+ * Entsprechend des Benutzertyps (Mieter/Abwart), wird man zur entsprechenden Seite weitergeleitet.
+ * 
+ * 
+ * @category   Controller
+ * @author     Malik
+ */
 include 'sessionHandling.php';
 include './DAO.php';
 

@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * TemplateView.php
+ *
+ * Objektklasse, um Anzeigeelemente zu kodieren.
+ *
+ * @author     Andreas Martin
+ */
 class TemplateView {
 
     public static function noHTML($input, $bEncodeAll = true, $encoding = "UTF-8")

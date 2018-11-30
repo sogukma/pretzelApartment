@@ -1,5 +1,13 @@
 <?php
-      
+/**
+ * manageInvoices.php
+ *
+ * Ansichtsseite zum Verwalten von Rechnungen eines Benutzers.
+ * Von hier aus können Rechnungen angesehen, erstellt, bearbeitet und gelöscht werden.
+ *
+ * @category   View, Model
+ * @author     Malik
+ */
         
         include 'sessionHandling.php';
         include './DAO.php';

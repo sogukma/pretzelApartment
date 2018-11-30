@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * sessionHandling.php
+ *
+ * Objektklasse zum Aufrufen von sicherheitsrelevanten Sessionelementen.
+ * Nicht zu verwechseln mit sessionHandler von PHP.
+ * 
+ * @category   Model
+ * @author     Malik
+ */
 class sessionHandling
 {
 
