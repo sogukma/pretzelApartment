@@ -142,7 +142,7 @@ $_SESSION['user_id'] = $_GET['user_id'];
                                         . '</tr>';
                                     }
                                     echo '<tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-                                    echo '<tr><th scope="row">Total Offene Kosten</th><td></td><td></td><td id="totalcosts">CHF </td><td></td><td></td></tr>';
+                                    echo '<tr><th scope="row">Total Offene Kosten</th><td></td><td></td><td id="totalcosts">CHF </td><td></td><td></td><td></td><td></td><td></td></tr>';
                                     echo '</tbody>';
                                     ?>
 

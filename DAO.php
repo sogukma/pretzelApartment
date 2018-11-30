@@ -182,4 +182,24 @@ class DAO {
         return mysqli_fetch_array($ergebnis);
     }
 
+    function selectOpenInvoices() {
+        $abfrage = "SELECT gestellt_am, betrag FROM rechnung where gestellt_am is not null";
+
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+
+    function selectClosedInvoices() {
+        $abfrage = "SELECT geschlossen_am, betrag FROM rechnung where geschlossen_am is not null";
+
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+
 }

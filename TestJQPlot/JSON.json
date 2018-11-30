@@ -1,0 +1,16 @@
+{
+ "Data": [
+ 	{
+		"Month": 1,
+		"Anrufe":200		
+	},
+	{
+		"Month": 2,
+		"Anrufe": 100
+	},
+	{
+		"Month": 3,
+		"Anrufe": 124
+	}
+]
+}

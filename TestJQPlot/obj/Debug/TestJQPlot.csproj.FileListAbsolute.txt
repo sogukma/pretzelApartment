@@ -1,0 +1,6 @@
+c:\users\sogma\documents\visual studio 2015\Projects\TestJQPlot\TestJQPlot\bin\TestJQPlot.dll.config
+c:\users\sogma\documents\visual studio 2015\Projects\TestJQPlot\TestJQPlot\bin\TestJQPlot.dll
+c:\users\sogma\documents\visual studio 2015\Projects\TestJQPlot\TestJQPlot\bin\TestJQPlot.pdb
+c:\users\sogma\documents\visual studio 2015\Projects\TestJQPlot\TestJQPlot\obj\Debug\TestJQPlot.dll
+c:\users\sogma\documents\visual studio 2015\Projects\TestJQPlot\TestJQPlot\obj\Debug\TestJQPlot.pdb
+C:\Users\SOGMA\Documents\Visual Studio 2015\Projects\TestJQPlot\TestJQPlot\obj\Debug\TestJQPlot.csprojResolveAssemblyReference.cache
