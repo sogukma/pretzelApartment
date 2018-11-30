@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DAO.php
  *
@@ -7,16 +8,14 @@
  * @category   Model
  * @author     Malik
  */
+class DAO {
 
-class DAO
-{
- private $link;
- private $benutzer; 
- private $passwort;
- private $dbname;
- 
-   public static function Instance()
-    {
+    private $link;
+    private $benutzer;
+    private $passwort;
+    private $dbname;
+
+    public static function Instance() {
         static $inst = null;
         if ($inst === null) {
             $inst = new DAO();
@@ -24,192 +23,155 @@ class DAO
         return $inst;
     }
 
- 
- 
- function __construct() {
-    $this->benutzer="b46bd03f9f4fdf";
-    $this->passwort="cb61f804";
-    $this->dbname="heroku_264d8c0ac2b1d8d";
- }
-function connect() {
-
-    $this->link = mysqli_connect("eu-cdbr-west-02.cleardb.net", $this->benutzer, $this->passwort, $this->dbname);
-    mysqli_query($this->link, "SET NAMES 'utf-8'");
-    
-    
-    
-}
-
-function delete($id){
-       $abfrage="delete from users where user_id='$id'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "<script type='text/javascript'>alert('Fehler: Benutzer hat noch Rechnungen!')</script>";
+    function __construct() {
+        $this->benutzer = "b46bd03f9f4fdf";
+        $this->passwort = "cb61f804";
+        $this->dbname = "heroku_264d8c0ac2b1d8d";
     }
-}
 
-function deleteInvoice($id){
-       $abfrage="delete from rechnung where id='$id'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: ";
+    function connect() {
+
+        $this->link = mysqli_connect("eu-cdbr-west-02.cleardb.net", $this->benutzer, $this->passwort, $this->dbname);
+        mysqli_query($this->link, "SET NAMES 'utf-8'");
     }
-}
 
+    function delete($id) {
+        $abfrage = "delete from users where user_id='$id'";
 
-function update($id,$name, $password, $benutzertyp){
-       $abfrage="update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";
-
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: ";
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "<script type='text/javascript'>alert('Fehler: Benutzer hat noch Rechnungen!')</script>";
+        }
     }
-}
 
+    function deleteInvoice($id) {
+        $abfrage = "delete from rechnung where id='$id'";
 
-
-function updateInvoice($id, $status, $fkid){
-        echo "persistence: ". $id." ".$status." ".$fkid;
-       $abfrage="update rechnung set status = '$status' where fk_userId='$fkid' and id='$id'";
-       
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-        echo "<popup>Änderung erfogreich vorgenommen</popup>";
-    } else {
-        echo "Error: ";
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: ";
+        }
     }
-}
 
+    function update($id, $name, $password, $benutzertyp) {
+        $abfrage = "update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";
 
-public function getLink()
-{
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: ";
+        }
+    }
+
+    function updateInvoice($id, $status, $fkid) {
+        echo "persistence: " . $id . " " . $status . " " . $fkid;
+        $abfrage = "update rechnung set status = '$status' where fk_userId='$fkid' and id='$id'";
+
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+            echo "<popup>Änderung erfogreich vorgenommen</popup>";
+        } else {
+            echo "Error: ";
+        }
+    }
+
+    public function getLink() {
         return $this->link;
-  
-}
+    }
 
+    function disconnect() {
+        mysqli_close($this->link);
+    }
 
-function disconnect()
-{
-      mysqli_close($this->link);
-}
-
-
-
-function insert($name, $password, $benutzertyp)
-{
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (user_name, user_password, user_typ)
+    function insert($name, $password, $benutzertyp) {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (user_name, user_password, user_typ)
     VALUES ('$name', '$password', '$benutzertyp')";
 
-    if (mysqli_query($this->link, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-    
-}
 
-function insertInvoice($userId, $rechnungstyp, $status, $betrag)
-{
-    $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
+    function insertInvoice($userId, $rechnungstyp, $status, $betrag) {
+        $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
     VALUES ('$rechnungstyp', '$status', '$betrag', '$userId')";
 
-    if (mysqli_query($this->link, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    
-}
-
-function selectUsers(){
-    $abfrage="select * from users";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
-       
-}
+    function selectUsers() {
+        $abfrage = "select * from users";
 
-function selectUsersNameById($userId){
-    $abfrage="select user_name from users where user_id = '$userId'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
-       
-}
+    function selectUsersNameById($userId) {
+        $abfrage = "select user_name from users where user_id = '$userId'";
 
-function selectInvoicesFromUserById($userId){
-    $abfrage="select * from rechnung where fk_userId = '$userId'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
-    
-    
-}
+    function selectInvoicesFromUserById($userId) {
+        $abfrage = "select * from rechnung where fk_userId = '$userId'";
 
-
-function selectInvoices(){
-    $abfrage="select * from rechnung";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
-    
-    
-}
+    function selectInvoices() {
+        $abfrage = "select * from rechnung";
 
-
-function selectUsersColumnNames()
-{
-
-        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'users'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-   
-}
 
-function selectInvoicesColumnNames()
-{
+    function selectUsersColumnNames() {
 
-        $abfrage="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'rechnung'";
-    
-     if (mysqli_query($this->link, $abfrage)) {
-        return mysqli_query($this->link, $abfrage);
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        $abfrage = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'users'";
+
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-   
-}
 
+    function selectInvoicesColumnNames() {
 
-function iterateResult($ergebnis)
-{
-    return mysqli_fetch_array($ergebnis);
-}
+        $abfrage = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'heroku_264d8c0ac2b1d8d' AND TABLE_NAME = 'rechnung'";
 
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-    
+
+    function iterateResult($ergebnis) {
+        return mysqli_fetch_array($ergebnis);
+    }
+
+}

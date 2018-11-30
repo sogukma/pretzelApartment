@@ -1,4 +1,5 @@
 <?php
+
 /**
  * login.php
  *
@@ -17,64 +18,54 @@ $sh = sessionHandling::Instance();
 $sh->open_session();
 $sh->regenerate_session_id();
 
-if(!$sh->session_is_open())
-{
-$eingeloggt = false;
+if (!$sh->session_is_open()) {
+    $eingeloggt = false;
 }
 
 
-    if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
-    {
-       $dbC = DAO::Instance();
-        $dbC->connect();
-        $abfrage="select * from users";
-        $ergebnis = mysqli_query($dbC->getLink(), $abfrage) or die(mysqli_error($dbC->getLink()));
+if (isset($_POST['benutzername']) AND isset($_POST['kennwort'])) {
+    $dbC = DAO::Instance();
+    $dbC->connect();
+    $abfrage = "select * from users";
+    $ergebnis = mysqli_query($dbC->getLink(), $abfrage) or die(mysqli_error($dbC->getLink()));
 
-        $login = @$_POST['benutzername'].$_POST['kennwort'];
+    $login = @$_POST['benutzername'] . $_POST['kennwort'];
 
-        while($zeile= mysqli_fetch_array($ergebnis))
-        {
+    while ($zeile = mysqli_fetch_array($ergebnis)) {
 
 
-                 $login2 = $zeile['user_name'].$zeile['user_password'];
+        $login2 = $zeile['user_name'] . $zeile['user_password'];
 
-  
-            //login wird auf Richtigkeit überprüft
-            if (password_verify($_POST['kennwort'], $zeile['user_password'])) {
 
-                        if($_POST['benutzername']==$zeile['user_name']) //eingelesenes wird mit benutzer login verglichen
-                      {
-                          $eingeloggt = true;
-                           $benutzertyp = $zeile['user_typ']; //benutzertyp wird ausgelesen und gespeichert
-                           $benutzertyp = trim($benutzertyp,"\n");
-                          break;
-                      }
-             }
+        //login wird auf Richtigkeit überprüft
+        if (password_verify($_POST['kennwort'], $zeile['user_password'])) {
+
+            if ($_POST['benutzername'] == $zeile['user_name']) { //eingelesenes wird mit benutzer login verglichen
+                $eingeloggt = true;
+                $benutzertyp = $zeile['user_typ']; //benutzertyp wird ausgelesen und gespeichert
+                $benutzertyp = trim($benutzertyp, "\n");
+                break;
+            }
         }
-
-
-         mysqli_close($dbC->getLink());
     }
+
+
+    mysqli_close($dbC->getLink());
+}
 
 //bei korrektem Login, wird Zugriff auf andere Seiten gewährt.
-if(@$eingeloggt)
-{
-            
-    $_SESSION['benutzername']= $_POST['benutzername'];
-    $_SESSION['benutzertyp']= $benutzertyp;
-    $_SESSION['eingeloggt']=true;
-    if($_SESSION['benutzertyp'] == 'abwart')
-    {
-    header("Location: user\manageUsers.php");
-    }
-    if($_SESSION['benutzertyp'] == 'mieter')
-    {
-    header("Location: startscreenTentant.php");
-    }
-}
+if (@$eingeloggt) {
 
-else
-{
+    $_SESSION['benutzername'] = $_POST['benutzername'];
+    $_SESSION['benutzertyp'] = $benutzertyp;
+    $_SESSION['eingeloggt'] = true;
+    if ($_SESSION['benutzertyp'] == 'abwart') {
+        header("Location: user\manageUsers.php");
+    }
+    if ($_SESSION['benutzertyp'] == 'mieter') {
+        header("Location: startscreenTentant.php");
+    }
+} else {
     echo "falsches Login";
     echo "<a href=\"index.php\"> Zurück zum Login</a>";
 }
