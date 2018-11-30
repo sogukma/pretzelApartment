@@ -6,7 +6,7 @@
  * Von hier aus können Benutzer angesehen, erstellt, bearbeitet und gelöscht werden.
  *
  * @category   View, Model
- * @author     Malik
+ * @author     Malik (code), Halil (design)
  */
         include '../sessionHandling.php';
         include '.././DAO.php';
@@ -102,13 +102,16 @@
                 <?php 
                     $ergebnis = $_SESSION['dbconnection']->selectUsersColumnNames();
                     echo '<thead>';
+                     /*Spaltennamen von Benutzer-Tabelle wird eingelesen */
+              
                        while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
                      }
                     echo '<th>Löschen</th><th>Bearbeiten</th><th>Rechnungen einsehen</th></thead><tbody>';
                      $ergebnis = $_SESSION['dbconnection']->selectUsers();
-                
+                   /* alle Benutzerdaten aus Db werden eingelesen und angezeigt */
+       
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                      

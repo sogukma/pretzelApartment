@@ -5,8 +5,8 @@
  * Stellt ein Formular für das Hinzufügen neuer Rechnungen für einen Benutzer zur Verfügung.
  * Beim Absenden des Formular wird in der Datenbank die entsprechende Funktion aufgerufen.
  *
- * @category   Controller
- * @author     Malik
+ * @category   Controller, View
+ * @author     Halil
  */
         function insertInvoice()
         {

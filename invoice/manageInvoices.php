@@ -6,7 +6,7 @@
  * Von hier aus können Rechnungen angesehen, erstellt, bearbeitet und gelöscht werden.
  *
  * @category   View, Model
- * @author     Malik
+ * @author     Malik (code), Halil (design)
  */
         
         include '../sessionHandling.php';
@@ -111,11 +111,12 @@
           }
         ?>
         <table id="manageInvoices" class="table table-bordred table-striped">
-            
+                
                 <?php 
                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesColumnNames();
                     
                     echo '<thead class="thead-dark">';
+                    /*Spaltennamen von Benutzer-Tabelle wird eingelesen */
                        while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                         echo '<th>'.  TemplateView::noHTML($zeile[0]).'</th>';
@@ -123,7 +124,8 @@
                         echo '<th>Löschen</th><th>Status ändern</th>';
                     echo '</thead><tbody>';
                      $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['user_id']);
-                
+                     
+                    /* alle Benutzerdaten aus Db werden eingelesen und angezeigt */
                      while($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis))
                      {        
                      

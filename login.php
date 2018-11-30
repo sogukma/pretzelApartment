@@ -25,9 +25,7 @@ $eingeloggt = false;
 
     if(isset($_POST['benutzername']) AND isset($_POST['kennwort']))
     {
-        //prüfen ob login ok oder nicht
-        // if($_POST['benutzername'] == "martin" AND $_POST['kennwort'] == "1234")
-        $dbC = DAO::Instance();
+       $dbC = DAO::Instance();
         $dbC->connect();
         $abfrage="select * from users";
         $ergebnis = mysqli_query($dbC->getLink(), $abfrage) or die(mysqli_error($dbC->getLink()));
@@ -41,7 +39,7 @@ $eingeloggt = false;
                  $login2 = $zeile['user_name'].$zeile['user_password'];
 
   
-
+            //login wird auf Richtigkeit überprüft
             if (password_verify($_POST['kennwort'], $zeile['user_password'])) {
 
                         if($_POST['benutzername']==$zeile['user_name']) //eingelesenes wird mit benutzer login verglichen
@@ -58,7 +56,7 @@ $eingeloggt = false;
          mysqli_close($dbC->getLink());
     }
 
-
+//bei korrektem Login, wird Zugriff auf andere Seiten gewährt.
 if(@$eingeloggt)
 {
             

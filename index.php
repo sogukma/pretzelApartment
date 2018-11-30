@@ -7,7 +7,7 @@
         * und bestätigt seine eingeben mit Klick auf den "Sign-In"-Button.
         *
         * @category   View
-        * @author     Malik
+        * @author     Malik (code), Halil (design)
         */
         include './sessionHandling.php';
         $sh = sessionHandling::Instance();

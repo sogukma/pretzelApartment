@@ -6,7 +6,7 @@
  * ruft in der Datenbank die entsprechende Funktion auf.
  *
  * @category   Controller
- * @author     Malik
+ * @author     Halil
  */
         include '../sessionHandling.php';
         include '.././DAO.php';

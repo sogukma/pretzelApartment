@@ -5,8 +5,8 @@
  * Stellt ein Formular für das Ändern des Status einer Rechnungen eines Benutzers zur Verfügung.
  * Beim Absenden des Formular wird in der Datenbank die entsprechende Funktion aufgerufen.
  *
- * @category   Controller
- * @author     Malik
+ * @category   Controller, View
+ * @author     Halil
  */
         include '../sessionHandling.php';
         include '.././DAO.php';
