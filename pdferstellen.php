@@ -18,7 +18,7 @@ class myPDF extends FPDF{
         $this->SetFont('Arial', 'B', 14); //Font
         $this->Image('pretzelIconsmall.png',10,5);
         $this->Cell(189,30,'',0,1);//end of line
-        $this->Cell(130,5,'Pretzel Real Estate jdjddkdkkdkd.',0,0); //Head
+        $this->Cell(130,5,'Pretzel Real Estate Inc. TETS',0,0); //Head
         $this->Cell(59,5,'',0,1);//end of line
 
 
@@ -95,8 +95,8 @@ class myPDF extends FPDF{
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(25,7,'',0,0);
         $this->Cell(65,7,'                                       Summe',0,0);
-        $this->Cell(11,7,CHF,0,0);
-        $this->Cell(24,7,'2500',1,1); //end of line
+        $this->Cell(11,7,'CHF',0,0);
+        $this->Cell(24,7,'',1,1); //end of line
    }
 }
 
