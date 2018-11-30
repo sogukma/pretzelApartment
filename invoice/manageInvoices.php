@@ -53,8 +53,8 @@ $_SESSION['user_id'] = $_GET['user_id'];
 
                     var invoiceId = $(this).parent().parent().parent().attr('id');
                     var fkUserId = $(this).parent().parent().parent().find(".fkUserId").html();
-                    window.open("updateInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId));
-
+                    window.location.href = "updateInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId);
+    
 
                 });
 
@@ -62,8 +62,8 @@ $_SESSION['user_id'] = $_GET['user_id'];
 
                     var invoiceId = $(this).parent().parent().parent().attr('id');
                     var fkUserId = $(this).parent().parent().parent().find(".fkUserId").html();
-                    window.open("deleteInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId));
-
+                    window.location.href = "deleteInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId);      
+   
 
                 });
 

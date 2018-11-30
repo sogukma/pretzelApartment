@@ -38,22 +38,21 @@ $_SESSION['dbconnection'] = $dbc;
                 $('.delete').click(function () {
 
                     var data = $(this).parent().parent().parent().attr('id');
-                    window.open("deleteUser.php?user_id=" + encodeURIComponent(data));
-
+                    window.location.href = "deleteUser.php?user_id=" + encodeURIComponent(data)
 
                 });
 
                 $('.update').click(function () {
                     data = $(this).parent().parent().parent().attr('id');
-                    window.open("updateUser.php?user_id=" + encodeURIComponent(data));
-
+                    window.location.href = "updateUser.php?user_id=" + encodeURIComponent(data)
+    
                 });
 
 
                 $('.rechnung').click(function () {
                     data = $(this).parent().parent().parent().attr('id');
-                    window.open("../invoice/manageInvoices.php?user_id=" + encodeURIComponent(data));
-
+                    window.location.href = "../invoice/manageInvoices.php?user_id=" + encodeURIComponent(data);
+                 
                 });
 
 

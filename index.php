@@ -5,7 +5,8 @@
  *
  * Startseite: hier gibt der Benutzer Name und Passwort ein 
  * und bestätigt seine eingeben mit Klick auf den "Sign-In"-Button.
- *
+ * Wenn auf diese Seite zugegriffen wird, werden alle Sessions geschlossen (implizites Logout)
+ * 
  * @category   View
  * @author     Malik (code), Halil (design)
  */
@@ -13,6 +14,7 @@ include './sessionHandling.php';
 $sh = sessionHandling::Instance();
 $sh->open_session();
 $sh->regenerate_session_id();
+// alle Sessions geschlossen.
 $sh->destroy_session(); //löschen aller session variablen
 session_unset();
 

@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                     <div class="form-group row"> 
                         <label for="strassennummer" class="col-sm-10 col-form-label">Strassennummer</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="strassennummer" name="strassennummer" type="text" required="true" pattern="^[0-9]+[a-z]$"/><br/>
+                            <input class="form-control" id="strassennummer" name="strassennummer" type="text" required="true" pattern="^[0-9]+[a-z]*$"/><br/>
                         </div>
                     </div>
                 <div class="form-group">
