@@ -8,8 +8,8 @@
  * @category   Controller
  * @author     Malik
  */
-     include 'sessionHandling.php';
-    include './DAO.php';
+        include '../sessionHandling.php';
+        include '.././DAO.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
         $sh->regenerate_session_id();

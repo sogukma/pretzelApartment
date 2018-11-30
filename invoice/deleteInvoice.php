@@ -8,8 +8,8 @@
  * @category   Controller
  * @author     Malik
  */
-     include 'sessionHandling.php';
-    include './DAO.php';
+        include '../sessionHandling.php';
+        include '.././DAO.php';
         $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
         $sh->regenerate_session_id();
@@ -23,4 +23,4 @@ if (isset($_GET['invoice_id'])) {
     $dbc->deleteInvoice($invoiceId);
 }
 
- header("Location:manageUsers.php");
+ header("Location:../user/manageUsers.php");

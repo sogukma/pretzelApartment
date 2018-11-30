@@ -67,7 +67,7 @@ if(@$eingeloggt)
     $_SESSION['eingeloggt']=true;
     if($_SESSION['benutzertyp'] == 'abwart')
     {
-    header("Location: manageUsers.php");
+    header("Location: user\manageUsers.php");
     }
     if($_SESSION['benutzertyp'] == 'mieter')
     {

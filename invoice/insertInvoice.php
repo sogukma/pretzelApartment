@@ -11,8 +11,9 @@
         function insertInvoice()
         {
  
-            include 'sessionHandling.php';
-            include './DAO.php';
+           include '../sessionHandling.php';
+        include '.././DAO.php';
+
             $sh = sessionHandling::Instance();
             $sh->open_session(); //vorhandene session übernehmen
             $sh->regenerate_session_id();
@@ -45,13 +46,14 @@
 
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
           <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="Header-Picture.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../Header-Picture.css">
+        <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-               <nav class="navbar navbar-default" id="navigation-purple">
+ <!-- Der Nav-Bar wurde von hier entnommen: https://demo.tutorialzine.com/2016/09/freebie-5-beautiful-bootstrap-headers/#Header-Picture-->
+          <nav class="navbar navbar-default" id="navigation-purple">
         <div class="container">
-            <a href="#"><img class="img-responsive img-circle avatar" src="pictures/pretzelIcon.png" alt="Avatar"></a>
+            <a href="#"><img class="img-responsive img-circle avatar" src="../pictures/pretzelIcon.png" alt="Avatar"></a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -61,7 +63,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php">Logout</a></li>
+                    <li><a href="../index.php">Logout</a></li>
                 </ul>
             </div>
         </div>
