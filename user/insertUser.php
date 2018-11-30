@@ -20,10 +20,13 @@ function insertUser() {
     $dbc = DAO::Instance();
     $dbc->connect();
 
-    $name = $_POST["nname"];
+    $username = $_POST["username"];
     $password = $_POST["password"];
     $benutzertyp = $_POST["benutzertyp"];
-    $dbc->insert($name, $password, $benutzertyp);
+    $nachname = $_POST["nachname"];
+    $vorname = $_POST["vorname"];
+    $strassennummer = $_POST["strassennummer"];
+    $dbc->insert($username, $password, $benutzertyp, $nachname, $vorname, $strassennummer);
     header("Location:manageUsers.php");
 }
 
@@ -73,9 +76,9 @@ if (isset($_POST['submit'])) {
 
                 <form method="post">
                     <div class="form-group row"> 
-                        <label for="nname" class="col-sm-10 col-form-label">Name</label>
+                        <label for="username" class="col-sm-10 col-form-label">Benutzername</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="nname" name="nname" type="text" required="true"/><br/>
+                            <input class="form-control" id="username" name="username" type="text" required="true"/><br/>
                         </div>
                     </div>
                     <div class="form-group row"> 
@@ -83,7 +86,25 @@ if (isset($_POST['submit'])) {
                         <div class="col-sm-10">
                             <input class="form-control" id="password" name="password" type="password" required="true"/><br/>
                         </div>
-                    </div> 
+                    </div>
+                    <div class="form-group row"> 
+                        <label for="nachname" class="col-sm-10 col-form-label">Nachname</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="nachname" name="nachname" type="text" required="true"/><br/>
+                        </div>
+                    </div>
+                    <div class="form-group row"> 
+                        <label for="vorname" class="col-sm-10 col-form-label">Vorname</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="vorname" name="vorname" type="text" required="true"/><br/>
+                        </div>
+                    </div>
+                    <div class="form-group row"> 
+                        <label for="strassennummer" class="col-sm-10 col-form-label">Strassennummer</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="strassennummer" name="strassennummer" type="text" required="true" pattern="^[0-9]+$"/><br/>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="benutzertyp">Benutzertyp</label>
                         <select class="form-control" name="benutzertyp" id="benutzertyp">

@@ -35,7 +35,7 @@ function updateInvoice() {
     $dbc = DAO::Instance();
     $dbc->updateInvoice($_SESSION['invoice_id'], $status, $_SESSION['fk_user_id']);
 
-    header("Location:../user/manageUsers.php");
+    header("Location:../invoice/manageInvoices.php?user_id=".$_SESSION['fk_user_id']);
 }
 
 ;

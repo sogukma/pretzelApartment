@@ -19,9 +19,12 @@ $sh->isCorrectPape("abwart");
 $dbc = DAO::Instance();
 $dbc->connect();
 
+
 if (isset($_GET['invoice_id'])) {
     $invoiceId = $_GET['invoice_id'];
+    $_SESSION['fk_user_id'] = $_GET['fk_user_id'];
     $dbc->deleteInvoice($invoiceId);
-}
 
-header("Location:../user/manageUsers.php");
+
+header("Location:../invoice/manageInvoices.php?user_id=".$_SESSION['fk_user_id']);
+}

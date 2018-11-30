@@ -55,8 +55,8 @@ class DAO {
         }
     }
 
-    function update($id, $name, $password, $benutzertyp) {
-        $abfrage = "update users set user_name = '$name', user_password = '$password', user_typ = '$benutzertyp' where user_id='$id'";
+    function update($id, $username, $password, $benutzertyp, $nachname, $vorname, $strassennummer) {
+        $abfrage = "update users set user_name = '$username', user_password = '$password', user_typ = '$benutzertyp', user_surname = '$nachname', user_firstname = '$vorname', user_streetnumber = '$strassennummer' where user_id='$id'";
 
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
@@ -66,8 +66,14 @@ class DAO {
     }
 
     function updateInvoice($id, $status, $fkid) {
-        echo "persistence: " . $id . " " . $status . " " . $fkid;
-        $abfrage = "update rechnung set status = '$status' where fk_userId='$fkid' and id='$id'";
+        //wenn eine geschlossene Rechnung wiedergeöffnet wird, wird der "geschlossen_am" Wert gelöscht
+        if ($status == "offen") {
+            $abfrage = "update rechnung set status = '$status', geschlossen_am = null where fk_userId='$fkid' and id='$id'";
+        }
+        //wenn eine Rechnung geschlossen wird, wird der Wert "geschlossen_am" gesetzt mit dem jetzigen Datum.
+        if ($status == "geschlossen") {
+            $abfrage = "update rechnung set status = '$status', geschlossen_am = CURDATE() where fk_userId='$fkid' and id='$id'";
+        }
 
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
@@ -85,10 +91,10 @@ class DAO {
         mysqli_close($this->link);
     }
 
-    function insert($name, $password, $benutzertyp) {
+    function insert($username, $password, $benutzertyp, $nachname, $vorname, $strassennummer) {
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (user_name, user_password, user_typ)
-    VALUES ('$name', '$password', '$benutzertyp')";
+        $sql = "INSERT INTO users (user_name, user_password, user_typ, user_surname, user_firstname, user_streetnumber)
+    VALUES ('$username', '$password', '$benutzertyp', '$nachname', '$vorname', '$strassennummer')";
 
         if (mysqli_query($this->link, $sql)) {
             echo "New record created successfully";
@@ -97,9 +103,11 @@ class DAO {
         }
     }
 
+    //wenn eine Rechnung erstellt wird wird, wird der Wert "geöffnet_am" gesetzt mit dem jetzigen Datum.
     function insertInvoice($userId, $rechnungstyp, $status, $betrag) {
-        $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId)
-    VALUES ('$rechnungstyp', '$status', '$betrag', '$userId')";
+        $sql = "INSERT INTO rechnung (rechnungstyp, status, betrag, fk_userId, gestellt_am)
+
+        VALUES ('$rechnungstyp', '$status', '$betrag', '$userId', CURDATE())";
 
         if (mysqli_query($this->link, $sql)) {
             echo "New record created successfully";
