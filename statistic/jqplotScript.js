@@ -1,20 +1,33 @@
+/** 
+ * jqplotScript.php
+ *
+ * Erstellt das Liniendiagramm für statisticView.php mithilfe jqPlot
+ * Daten zum Liniendiagramm werden mit asynchronen AJAX-Calls aufgenommen
+ *
+ * @category   Model
+ * @author     Malik
+ *
+ * 
+ */
 $(document).ready(function () {
     $.jqplot.config.enablePlugins = true;
-
+    //lineURL beinhaltet die beiden Files, von wo aus Daten für Liniendiagramm gelesen werden
     var lineURL = ["daoOpenInvoices.php", "daoClosedInvoices.php"];
+    //lines beinhaltet ein JSON, mit welcher das Liniendiagramm erstellt wird 
     var lines = [];
+    //serieNames beinhaltet die Namen der beiden Rechnungstypen 
     var serieNames = ["offene Rechnungen", "geschlossene Rechnungen"];
-    var series = [];
     var remaining = lineURL.length;
+   
     for (i = 0; i < lineURL.length; i++)
     {
         var legendPlace = 1;
 
         getJSON(lineURL[i], serieNames[i], function (response, serieName) {
-
             lines.push(response);
-            series.push('{"lineWidth": 4, "label": "' + serieName + '", "showLabel": true}');
+            //Legende zum Liniendiagramm wird beschriftet
             $("#plotLegend li:nth-child(" + legendPlace + ")").append(serieName);
+            //erst wenn die Daten beider URLs gelesen wurden (also remaining-URLs = 0 ist) wird Liniendiagramm erstellt
             --remaining;
             if (remaining == 0)
             {
@@ -50,7 +63,7 @@ $(document).ready(function () {
     {
         $.ajax({//create an ajax request to display.php
             type: "GET",
-            url: lineName+"/",
+            url: lineName + "/",
             async: true,
             dataType: "json", //expect html to be returned                
             success: function (response) {

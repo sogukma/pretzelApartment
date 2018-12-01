@@ -1,4 +1,13 @@
 <?php
+/**
+ * daoClosedInvoices.php
+ *
+ * Holt Daten aus der Datenbank zur Erstellung 
+ * der Linie "geschlossenen Rechnungen" im Liniendiagramm.
+ *
+ * @category   Controller
+ * @author     Malik
+ */
 
 include '../sessionHandling.php';
 include '.././DAO.php';

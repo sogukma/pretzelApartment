@@ -1,4 +1,13 @@
 <?php
+/**
+ * statisticView.php
+ *
+ * Erstellt die Statistikauswertung bestehend aus einem grafischen Liniendiagramm
+ * und einer textuellen Auswertung.
+ * 
+ * @category   View
+ * @author     Malik
+ */
 include '../sessionHandling.php';
 include '.././DAO.php';
 include '.././TemplateView.php';

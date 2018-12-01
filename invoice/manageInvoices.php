@@ -117,7 +117,7 @@ $_SESSION['user_id'] = $_GET['user_id'];
                                     $ergebnis = $_SESSION['dbconnection']->selectInvoicesColumnNames();
 
                                     echo '<thead>'
-                                    . '<th>RechnungId</th>'
+                                    . '<th>Rechnung Id</th>'
                                     . '<th>Rechnungstyp</th>'
                                     . '<th>Status</th>'
                                     . '<th>Betrag</th>'

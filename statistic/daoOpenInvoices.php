@@ -1,4 +1,13 @@
 <?php
+/**
+ * daoOpenInvoices.php
+ *
+ * Holt Daten aus der Datenbank zur Erstellung 
+ * der Linie "offene Rechnungen" im Liniendiagramm.
+ *
+ * @category   Controller
+ * @author     Malik
+ */
 
 include '../sessionHandling.php';
 include '.././DAO.php';
