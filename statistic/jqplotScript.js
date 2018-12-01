@@ -50,7 +50,7 @@ $(document).ready(function () {
     {
         $.ajax({//create an ajax request to display.php
             type: "GET",
-            url: lineName,
+            url: lineName+"/",
             async: true,
             dataType: "json", //expect html to be returned                
             success: function (response) {
