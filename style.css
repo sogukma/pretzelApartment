@@ -9,9 +9,16 @@
     border: 50px solid white;
 }
 
+.statcont{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    float: left;
+}
+
 .insertForm{
     border: 2px solid black;
     border-radius: 5px;
     padding: 5px;
-    max-width:400px;
+    max-width:50%;
 }

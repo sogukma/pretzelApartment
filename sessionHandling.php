@@ -50,7 +50,10 @@ class sessionHandling {
         if ($_SESSION['eingeloggt'] == true && $usertype == $_SESSION['benutzertyp']) {
             
         } else {
-            header("Location:index.php"); //wenn auf c direkt zugregriffen wird, wird direkt auf login verleitet
+            echo   " <script>
+      window.location.href = 'index.php';
+    </script>";
+            //header("Location:index.php"); //wenn auf c direkt zugregriffen wird, wird direkt auf login verleitet
         }
     }
 

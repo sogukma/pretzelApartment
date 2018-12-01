@@ -54,7 +54,7 @@ $_SESSION['user_id'] = $_GET['user_id'];
                     var invoiceId = $(this).parent().parent().parent().attr('id');
                     var fkUserId = $(this).parent().parent().parent().find(".fkUserId").html();
                     window.location.href = "updateInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId);
-    
+
 
                 });
 
@@ -62,8 +62,8 @@ $_SESSION['user_id'] = $_GET['user_id'];
 
                     var invoiceId = $(this).parent().parent().parent().attr('id');
                     var fkUserId = $(this).parent().parent().parent().find(".fkUserId").html();
-                    window.location.href = "deleteInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId);      
-   
+                    window.location.href = "deleteInvoice.php?invoice_id=" + encodeURIComponent(invoiceId) + "&fk_user_id=" + encodeURIComponent(fkUserId);
+
 
                 });
 
@@ -86,7 +86,9 @@ $_SESSION['user_id'] = $_GET['user_id'];
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="../index.php">Logout</a></li>
+                        <li><a href="../user/manageUsers.php">Benutzerübersicht</a></li>   
+                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
+                        <li><a href="../index.php">Logout</a></li>              
                     </ul>
                 </div>
             </div>

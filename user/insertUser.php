@@ -63,6 +63,8 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
+                        <li><a href="manageUsers.php">Benutzerübersicht</a></li>   
+                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
                         <li><a href="../index.php">Logout</a></li>
                     </ul>
                 </div>

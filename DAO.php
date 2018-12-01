@@ -194,22 +194,26 @@ class DAO {
 
     function selectSumOfOpenInvoices() {
         $abfrage = "SELECT sum(betrag) FROM rechnung where status = 'offen'";
-/*
+
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
             echo "Error";
         }
-        */
-        while ($zeile = $this->iterateResult(mysqli_query($this->link, $abfrage))) {
-            return $zeile[0];
-        }
-
-
     }
 
     function selectClosedInvoices() {
         $abfrage = "SELECT geschlossen_am, sum(betrag) FROM rechnung where geschlossen_am is not null group by geschlossen_am";
+
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error";
+        }
+    }
+
+    function selectSumOfClosedInvoices() {
+        $abfrage = "SELECT sum(betrag) FROM rechnung where geschlossen_am is not null";
 
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
