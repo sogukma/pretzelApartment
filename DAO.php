@@ -99,7 +99,7 @@ class DAO {
         if (mysqli_query($this->link, $sql)) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -112,7 +112,7 @@ class DAO {
         if (mysqli_query($this->link, $sql)) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -122,7 +122,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -132,7 +132,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -142,7 +142,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -152,7 +152,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -163,7 +163,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -174,7 +174,7 @@ class DAO {
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
@@ -183,22 +183,38 @@ class DAO {
     }
 
     function selectOpenInvoices() {
-        $abfrage = "SELECT gestellt_am, betrag FROM rechnung where gestellt_am is not null";
+        $abfrage = "SELECT gestellt_am, sum(betrag) FROM rechnung where gestellt_am is not null and status='offen' group by gestellt_am";
 
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
+    function selectSumOfOpenInvoices() {
+        $abfrage = "SELECT sum(betrag) FROM rechnung where status = 'offen'";
+/*
+        if (mysqli_query($this->link, $abfrage)) {
+            return mysqli_query($this->link, $abfrage);
+        } else {
+            echo "Error";
+        }
+        */
+        while ($zeile = $this->iterateResult(mysqli_query($this->link, $abfrage))) {
+            return $zeile[0];
+        }
+
+
+    }
+
     function selectClosedInvoices() {
-        $abfrage = "SELECT geschlossen_am, betrag FROM rechnung where geschlossen_am is not null";
+        $abfrage = "SELECT geschlossen_am, sum(betrag) FROM rechnung where geschlossen_am is not null group by geschlossen_am";
 
         if (mysqli_query($this->link, $abfrage)) {
             return mysqli_query($this->link, $abfrage);
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error";
         }
     }
 
