@@ -9,16 +9,15 @@
  * @author     Malik
  */
 include '../sessionHandling.php';
-include '.././DAO.php';
+include '../dbConnector.php';
 include '.././TemplateView.php';
+
 $sh = sessionHandling::Instance();
 $sh->open_session(); //vorhandene session übernehmen
 $sh->regenerate_session_id();
 $sh->isCorrectPape("abwart");
 
-$dbc = DAO::Instance();
-$dbc->connect();
-$_SESSION['dbconnection'] = $dbc;
+
 ?>﻿
 <!DOCTYPE html>
 <html>
@@ -102,9 +101,9 @@ $_SESSION['dbconnection'] = $dbc;
                             <td>offene Rechnungen</td>
                             <td id="line1">CHF                              
                                 <?php
-                                $ergebnis = $_SESSION['dbconnection']->selectSumOfOpenInvoices();
+                                $ergebnis = $dbc->selectSumOfOpenInvoices();
 
-                                while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                                while ($zeile = $dbc->iterateResult($ergebnis)) {
                                     echo TemplateView::noHTML($zeile[0]);
                                 }
                                 ?>
@@ -114,9 +113,9 @@ $_SESSION['dbconnection'] = $dbc;
                             <td>geschlossene Rechnungen</td>
                             <td id="line2">CHF 
                                 <?php
-                                $ergebnis = $_SESSION['dbconnection']->selectSumOfClosedInvoices();
+                                $ergebnis = $dbc->selectSumOfClosedInvoices();
 
-                                while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                                while ($zeile = $dbc->iterateResult($ergebnis)) {
                                     echo TemplateView::noHTML($zeile[0]);
                                 }
                                 ?>    

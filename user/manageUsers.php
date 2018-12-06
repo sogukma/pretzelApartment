@@ -9,16 +9,14 @@
  * @author     Malik (code), Halil (design)
  */
 include '../sessionHandling.php';
-include '.././DAO.php';
 include '.././TemplateView.php';
+include '../dbConnector.php';
 $sh = sessionHandling::Instance();
 $sh->open_session(); //vorhandene session übernehmen
 $sh->regenerate_session_id();
 $sh->isCorrectPape("abwart");
 
-$dbc = DAO::Instance();
-$dbc->connect();
-$_SESSION['dbconnection'] = $dbc;
+
 ?>
 <html>
     <head>
@@ -81,11 +79,11 @@ $_SESSION['dbconnection'] = $dbc;
                         <table class="table table-bordred table-striped">
 
                             <?php
-                            /* $ergebnis = $_SESSION['dbconnection']->selectUsersColumnNames();
+                            /* $ergebnis = $dbc->selectUsersColumnNames();
                               echo '<thead>';
 
 
-                              while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                              while ($zeile = $dbc->iterateResult($ergebnis)) {
                               echo '<th>' . TemplateView::noHTML($zeile[0]) . '</th>';
                               } */
                             echo '<thead>'
@@ -99,10 +97,10 @@ $_SESSION['dbconnection'] = $dbc;
                             . '<th>Bearbeiten</th>'
                             . '<th>Rechnungen <br/> einsehen</th>'
                             . '</thead><tbody>';
-                            $ergebnis = $_SESSION['dbconnection']->selectUsers();
+                            $ergebnis = $dbc->selectUsers();
                             /* alle Benutzerdaten aus Db werden eingelesen und angezeigt */
 
-                            while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                            while ($zeile = $dbc->iterateResult($ergebnis)) {
 
                                 echo '<tr id="' . $zeile[0] . '">'
                                 . '<th scope="row">' . TemplateView::noHTML($zeile[0]) . '</th>'

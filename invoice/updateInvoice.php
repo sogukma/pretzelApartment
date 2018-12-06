@@ -9,30 +9,26 @@
  * @author     Halil
  */
 include '../sessionHandling.php';
-include '.././DAO.php';
+
 $sh = sessionHandling::Instance();
 $sh->open_session(); //vorhandene session übernehmen
 $sh->regenerate_session_id();
 $sh->isCorrectPape("abwart");
 
-$dbc = DAO::Instance();
-$dbc->connect();
-$_SESSION['dbconnection'] = $dbc;
+
 
 if (isset($_GET['invoice_id'])) {
 
     $_SESSION['invoice_id'] = $_GET['invoice_id'];
     $_SESSION['fk_user_id'] = $_GET['fk_user_id'];
 } else {
-    echo "geht nicht";
+    echo "Invoice Id nicht vorhanden";
 }
 
 function updateInvoice() {
-
+    include '../dbConnector.php';
     $status = $_POST["status"];
 
-    echo $status . "" . $_SESSION['invoice_id'] . "" . $_SESSION['fk_user_id'];
-    $dbc = DAO::Instance();
     $dbc->updateInvoice($_SESSION['invoice_id'], $status, $_SESSION['fk_user_id']);
 
     header("Location:../invoice/manageInvoices.php?user_id=" . $_SESSION['fk_user_id']);

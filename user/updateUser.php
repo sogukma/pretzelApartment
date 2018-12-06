@@ -9,26 +9,23 @@
  * @author     Halil
  */
 include '../sessionHandling.php';
-include '.././DAO.php';
+
 $sh = sessionHandling::Instance();
 $sh->open_session(); //vorhandene session übernehmen
 $sh->regenerate_session_id();
 $sh->isCorrectPape("abwart");
 
-$dbc = DAO::Instance();
-$dbc->connect();
-$_SESSION['dbconnection'] = $dbc;
 
 
 if (isset($_GET['user_id'])) {
 
     $_SESSION['user_id'] = $_GET['user_id'];
 } else {
-    echo "geht nicht";
+    echo "User Id nicht vorhanden";
 }
 
 function update() {
-
+    include '../dbConnector.php';
     $username = $_POST["username"];
     $password = $_POST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -36,7 +33,7 @@ function update() {
     $nachname = $_POST['nachname'];
     $vorname = $_POST['vorname'];
     $strassennummer = $_POST['strassennummer'];
-    $_SESSION['dbconnection']->update($_SESSION['user_id'], $username, $password, $benutzertyp, $nachname, $vorname, $strassennummer);
+    $dbc->update($_SESSION['user_id'], $username, $password, $benutzertyp, $nachname, $vorname, $strassennummer);
     header("Location:manageUsers.php");
 }
 

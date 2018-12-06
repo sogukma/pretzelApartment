@@ -9,16 +9,13 @@
  * @author     Malik (code), Halil (design)
  */
 include '../sessionHandling.php';
-include '.././DAO.php';
+include '../dbConnector.php';
 include '.././TemplateView.php';
 $sh = sessionHandling::Instance();
 $sh->open_session(); //vorhandene session übernehmen
 $sh->regenerate_session_id();
 $sh->isCorrectPape("abwart");
 
-$dbc = DAO::Instance();
-$dbc->connect();
-$_SESSION['dbconnection'] = $dbc;
 $_SESSION['user_id'] = $_GET['user_id'];
 ?>
 
@@ -84,16 +81,16 @@ $_SESSION['user_id'] = $_GET['user_id'];
                         <div class="col-md-12">
                             <div class="table-responsive">    
                                 <?php
-                                $ergebnis = $_SESSION['dbconnection']->selectUsersNameById($_SESSION['user_id']);
+                                $ergebnis = $dbc->selectUsersNameById($_SESSION['user_id']);
 
-                                while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                                while ($zeile = $dbc->iterateResult($ergebnis)) {
                                     echo '<h3 value="' . TemplateView::noHTML($zeile[0]) . '">Rechnungen von ' . TemplateView::noHTML($zeile[0]) . '</h3>';
                                 }
                                 ?>
                                 <table id="manageInvoices" class="table table-bordred table-striped">
 
                                     <?php
-                                    $ergebnis = $_SESSION['dbconnection']->selectInvoicesColumnNames();
+                                    $ergebnis = $dbc->selectInvoicesColumnNames();
 
                                     echo '<thead>'
                                     . '<th>Rechnung Id</th>'
@@ -105,10 +102,10 @@ $_SESSION['user_id'] = $_GET['user_id'];
                                     . '<th>Bezahlt am</th>'
                                     . '<th>Löschen</th><th>Status ändern</th>';
                                     echo '</thead><tbody>';
-                                    $ergebnis = $_SESSION['dbconnection']->selectInvoicesFromUserById($_SESSION['user_id']);
+                                    $ergebnis = $dbc->selectInvoicesFromUserById($_SESSION['user_id']);
 
                                     /* alle Benutzerdaten aus Db werden eingelesen und angezeigt */
-                                    while ($zeile = $_SESSION['dbconnection']->iterateResult($ergebnis)) {
+                                    while ($zeile = $dbc->iterateResult($ergebnis)) {
 
                                         echo '<tr id="' . TemplateView::noHTML($zeile[0]) . '">'
                                         . '<th scope="row">' . TemplateView::noHTML($zeile[0]) . '</th>'

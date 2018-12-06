@@ -24,6 +24,7 @@ if (!$sh->session_is_open()) {
 
 
 if (isset($_POST['benutzername']) AND isset($_POST['kennwort'])) {
+    global $dbC;
     $dbC = DAO::Instance();
     $dbC->connect();
     $abfrage = "select * from users";
