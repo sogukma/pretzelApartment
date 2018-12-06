@@ -63,7 +63,7 @@ $_SESSION['dbconnection'] = $dbc;
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="../user/manageUsers.php">Benutzerübersicht</a></li>   
-                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
+                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen aller Mieter</a></li>
                         <li><a href="../index.php">Logout</a></li>
                     </ul>
                 </div>

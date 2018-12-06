@@ -20,6 +20,9 @@ function insertUser() {
     $dbc = DAO::Instance();
     $dbc->connect();
 
+    // bei Username und Password werden alle whitespaces
+ //   $username = preg_replace('/\s+/', '', $_POST["username"]);
+ //   $password = preg_replace('/\s+/', '', $_POST["password"]);
     $username = $_POST["username"];
     $password = $_POST["password"];
     $benutzertyp = $_POST["benutzertyp"];
@@ -50,27 +53,10 @@ if (isset($_POST['submit'])) {
     </head>
 
     <body>
-        <!-- Der Nav-Bar wurde von hier entnommen: https://demo.tutorialzine.com/2016/09/freebie-5-beautiful-bootstrap-headers/#Header-Picture-->
-        <nav class="navbar navbar-default" id="navigation-purple">
-            <div class="container">
-                <a href="#"><img class="img-responsive img-circle avatar" src="../pictures/pretzelIcon.png" alt="Avatar"></a>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="manageUsers.php">Benutzerübersicht</a></li>   
-                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
-                        <li><a href="../index.php">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        <!-- Nav-Bar wird included  -->
+        <?php
+        include '../Header-Picture.html';
+        ?>
         <div class="container center_div">
 
             <div class="insertForm rounded container">
@@ -86,7 +72,7 @@ if (isset($_POST['submit'])) {
                     <div class="form-group row"> 
                         <label for="password" class="col-sm-10 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="password" name="password" type="password" required="true"/><br/>
+                            <input class="form-control" id="password" name="password" type="password" required="true"><br/>
                         </div>
                     </div>
                     <div class="form-group row"> 

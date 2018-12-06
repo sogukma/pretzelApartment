@@ -49,27 +49,10 @@ if (isset($_POST['submit'])) {
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <!-- Der Nav-Bar wurde von hier entnommen: https://demo.tutorialzine.com/2016/09/freebie-5-beautiful-bootstrap-headers/#Header-Picture-->
-        <nav class="navbar navbar-default" id="navigation-purple">
-            <div class="container">
-                <a href="#"><img class="img-responsive img-circle avatar" src="../pictures/pretzelIcon.png" alt="Avatar"></a>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../user/manageUsers.php">Benutzerübersicht</a></li>   
-                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
-                        <li><a href="../index.php">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        <!-- Nav-Bar wird included  -->
+        <?php
+        include '../Header-Picture.html';
+        ?>
         <div class="insertForm rounded container">
 
             <h3>Neue Rechnung hinzufügen:</h3>
@@ -77,7 +60,7 @@ if (isset($_POST['submit'])) {
             <form method="post">
 
                 <div class="form-group row"> 
-                    <label for="betrag" class="col-sm-10 col-form-label">Betrag</label>
+                    <label for="betrag" class="col-sm-10 col-form-label">Betrag in CHF</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="betrag" name="betrag" type="text" required="true" pattern="^[0-9]+$"/><br/>
                     </div>

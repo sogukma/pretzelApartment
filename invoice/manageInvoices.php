@@ -26,13 +26,8 @@ $_SESSION['user_id'] = $_GET['user_id'];
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-        <!------ Include the above in your HEAD tag ---------->
-
-
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../Header-Picture.css">
 
 
         <script type='text/javascript'>
@@ -73,26 +68,10 @@ $_SESSION['user_id'] = $_GET['user_id'];
         </script>
     </head>
     <body>
-        <!-- Der Nav-Bar wurde von hier entnommen: https://demo.tutorialzine.com/2016/09/freebie-5-beautiful-bootstrap-headers/#Header-Picture-->
-        <nav class="navbar navbar-default" id="navigation-purple">
-            <div class="container">
-                <a href="#"><img class="img-responsive img-circle avatar" src="../pictures/pretzelIcon.png" alt="Avatar"></a>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../user/manageUsers.php">Benutzerübersicht</a></li>   
-                        <li><a href="../statistic/statisticView.php">Statistik Rechnungen</a></li>
-                        <li><a href="../index.php">Logout</a></li>              
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <!-- Nav-Bar wird included  -->
+        <?php
+        include '../Header-Picture.html';
+        ?>
         <div class="content">
 
 
