@@ -71,7 +71,6 @@ $_SESSION['dbconnection'] = $dbc;
         </nav>
         <div id="containerdiv" class="container">
             <h3>Verlauf der Rechungszustände</h3>
-
             <div id="chartdiv" class="col-md-8 statcont">
                 <!-- This legend is based on following work: https://tilemill-project.github.io/tilemill/docs/guides/advanced-legends/-->
                 <div class='my-legend'>
