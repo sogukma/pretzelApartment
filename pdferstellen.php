@@ -1,11 +1,6 @@
 <?php
-/**
- * pdferstellen.php
- *
- *Hier werden die offenen Rechnungen als ein PDF-Datei generiert.
- *
-     
- */
+
+
  include 'sessionHandling.php';
     $sh = sessionHandling::Instance();
         $sh->open_session(); //vorhandene session übernehmen
@@ -54,7 +49,7 @@ class myPDF extends FPDF{
         $this->Cell(189,15,'',0,1);
         
         //billing adress
-        $this->SetFont('Arial', 'B', 14); //Font
+        $this->SetFont('Arial', 'B', 15); //Font
         $this->Cell(130,5,'Rechnung',0,0);
         $this->Cell(25,5,'',0,0);
         $this->Cell(34,5,'',0,1);
@@ -62,20 +57,22 @@ class myPDF extends FPDF{
 
         $this->SetFont('Arial', '', 12); //Font
         
-        //Individual adress (doesnt work)
+/**
+ * Individual adress (doesnt work)
+ */
         function viewTable2($db, $userId){
         $stmt2 = $db->query("select user_streetnumber from users WHERE user_id = '$userId'");
         $data = $stmt2->fetch(PDO::FETCH_OBJ);
      
         //$this->Cell(30,5,'',0,0);
-        //$this->Cell(70,5,$data->user_streetnumber,1,1);
+        //$this->Cell(70,5,$data->user_streetnumber,0,1);
    }
                 
         $this->Cell(30,5,'An:',0,0);
-        $this->Cell(70,5,'Vorname Name',0,1); //<----------------------------
+        $this->Cell(70,5,'Vorname Name',0,1); //<----------------------------------------------------------------------------------
         
         $this->Cell(30,5,'',0,0);
-        $this->Cell(70,5,'Strasse',0,1); //<----------------------------------
+        $this->Cell(70,5,'Strasse',0,1); //<---------------------------------------------------------------------------------------
         
 
         //dummy empty cell, vertical
@@ -85,7 +82,7 @@ class myPDF extends FPDF{
     //page number
     function footer(){
         $this->SetY(-15);
-        $this->SetFont('Arial','',10);
+        $this->SetFont('Arial','',12);
         $this->Cell(0,10,'Seite '.$this->PageNo().'/{nb}',0,0,'C');
     }
     
@@ -109,7 +106,9 @@ class myPDF extends FPDF{
             $this->Cell(35,7,$data->gestellt_am,1,0);
             $this->Cell(35,7,$data->betrag,1,1,'R'); 
         }
-        //Betrag sum (doenst work)
+ /**
+ * Summe (doesnt work). different variations
+ */
         
         //$sum= mysql_query("select sum(betrag) from rechnung WHERE status = 'offen'");
         //$row = mysql_fetch_array($sum);
@@ -125,7 +124,7 @@ class myPDF extends FPDF{
         $this->Cell(25,7,'',0,0);
         $this->Cell(74,7,'                                           Summe',0,0);
         $this->Cell(11,7,'CHF',0,0);
-        $this->Cell(35,7,'PREIS',1,1,'R'); //<---------------------------
+        $this->Cell(35,7,'PREIS',1,1,'R'); //<-----------------------------------------------------------------------------------------
    }
    
    
@@ -138,7 +137,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage('P','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db, $userId);
-//$pdf->viewTable2($db, $userId);
 $pdf->Output();
 
 ?>
