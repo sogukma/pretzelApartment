@@ -57,7 +57,7 @@ class myPDF extends FPDF{
         //empty cell, vertical
         $this->Cell(189,15,'',0,1);
         
-        //"Rechnung"-Titel
+    //"Rechnung"-Titel
         $this->SetFont('Arial', 'B', 15); //Font
         $this->Cell(130,5,'Rechnung',0,0);
         $this->Cell(25,5,'',0,0);
@@ -88,6 +88,7 @@ class myPDF extends FPDF{
         $this->Cell(35,7,'Gestellt am',1,0);
         $this->Cell(35,7,'Betrag',1,1); //end of line
     }
+    
     //Body of the table
     function tableBody($db, $userId){
         $this->SetFont('Arial','',12);
@@ -110,10 +111,9 @@ class myPDF extends FPDF{
         
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(25,7,'',0,0);
-        $this->Cell(74,7,'                                           Summe',0,0);
-        $this->Cell(11,7,'CHF',0,0);
-        $this->Cell(35,7,$data4->sumbetrag,1,1,'R');
-        
+        $this->Cell(85,7,'Summe ',0,0,'R');
+        $this->Cell(11,7,'CHF',1,0);
+        $this->Cell(24,7,$data4->sumbetrag,1,1,'R');
     }
 
    
@@ -136,6 +136,5 @@ $pdf->tableHead();
 $pdf->tableBody($db, $userId);
 $pdf->sum($db, $userId);
 $pdf->Output();
-
 ?>
 
