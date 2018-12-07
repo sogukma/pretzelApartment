@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * pdferstellen.php
+ *
+ * Die Rechnungen werden übersichtlich in einem PDF-Format generiert.
+ *
+ * @category   View, Model
+ * @author     Necati (code), (design)
+ */
 
  include 'sessionHandling.php';
     $sh = sessionHandling::Instance();
@@ -55,37 +62,27 @@ class myPDF extends FPDF{
         $this->Cell(34,5,'',0,1);
         $this->Cell(189,3,'',0,1);
 
-        $this->SetFont('Arial', '', 12); //Font
-        
-/**
- * Individual adress (doesnt work)
- */
-        function viewTable2($db, $userId){
-        $stmt2 = $db->query("select user_streetnumber from users WHERE user_id = '$userId'");
-        $data2 = $stmt2->fetch(PDO::FETCH_OBJ);
-     
-        $this->Cell(30,5,'',0,0);
-        $this->Cell(70,5,$data2->user_streetnumber,0,1);
+        $this->SetFont('Arial', '', 12); //Font   
    }
-                
-        $this->Cell(30,5,'An:',0,0);
-        $this->Cell(70,5,'Vorname Name',0,1); //<----------------------------------------------------------------------------------
+    
+    function useradress($db, $userId){
+        $stmt2 = $db->query("select user_firstname from users WHERE user_id = '$userId'");
+        $data2 = $stmt2->fetch(PDO::FETCH_OBJ);       
         
+        $stmt3 = $db->query("select user_surname from users WHERE user_id = '$userId'");
+        $data3 = $stmt3->fetch(PDO::FETCH_OBJ);
+        
+        $stmt4 = $db->query("select user_streetnumber from users WHERE user_id = '$userId'");
+        $data4 = $stmt4->fetch(PDO::FETCH_OBJ);
+        
+        $this->Cell(30,5,'An: ',0,0);
+        $this->Cell(15,5,$data2->user_firstname.' '.$data3->user_surname,0,1);
         $this->Cell(30,5,'',0,0);
-        $this->Cell(70,5,'Strasse',0,1); //<---------------------------------------------------------------------------------------
-        
-
-        //dummy empty cell, vertical
-        $this->Cell(189,15,'',0,1);//end of line
-    }
+        $this->Cell(70,5,$data4->user_streetnumber,0,1);
+        $this->Cell(189,15,'',0,1); //empty cell
+   } 
     
-    //page number
-    function footer(){
-        $this->SetY(-15);
-        $this->SetFont('Arial','',12);
-        $this->Cell(0,10,'Seite '.$this->PageNo().'/{nb}',0,0,'C');
-    }
-    
+ 
     function headerTable(){
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(25,7,'ID',1,0);
@@ -106,28 +103,29 @@ class myPDF extends FPDF{
             $this->Cell(35,7,$data->gestellt_am,1,0);
             $this->Cell(35,7,$data->betrag,1,1,'R'); 
         }
- /**
- * Summe (doesnt work). different variations
- */
         
-        //$sum= mysql_query("select sum(betrag) from rechnung WHERE status = 'offen'");
-        //$row = mysql_fetch_array($sum);
-                        
-        //$sum = $db->query("select sum(betrag) from rechnung WHERE status = 'offen'");
-        //$data2 = $sum->fetch(PDO::FETCH_OBJ);
+    }
+    
+    function sum($db, $userId){
         
-        //$query = "select sum(betrag) from rechnung WHERE status = 'offen'";  
-        //$result = mysql_query($query); 
-        //$row = mysql_fetch_array($result);
+        $stmt4 = $db->query("select sum(betrag) from rechnung WHERE fk_userId = '$userId' AND status = 'offen'");
+        $data4 = $stmt4->fetch(PDO::FETCH_OBJ);
         
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(25,7,'',0,0);
         $this->Cell(74,7,'                                           Summe',0,0);
         $this->Cell(11,7,'CHF',0,0);
-        $this->Cell(35,7,'PREIS',1,1,'R'); //<-----------------------------------------------------------------------------------------
-   }
+        //$this->Cell(35,7,$data4->sum(betrag),1,1,'R');
+        
+    }
+
    
-   
+       //page number
+    function footer(){
+        $this->SetY(-15);
+        $this->SetFont('Arial','',12);
+        $this->Cell(0,10,'Seite '.$this->PageNo().'/{nb}',0,0,'C');
+    }
 }
 
 //generating PDF
@@ -135,9 +133,10 @@ class myPDF extends FPDF{
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('P','A4',0);
+$pdf->useradress($db, $userId);
 $pdf->headerTable();
 $pdf->viewTable($db, $userId);
-//$pdf->viewTable2($db, $userId);
+$pdf->sum($db, $userId);
 $pdf->Output();
 
 ?>
