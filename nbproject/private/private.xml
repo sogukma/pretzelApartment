@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/user/updateUser.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/pdferstellen.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/user/deleteUser.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/invoice/insertInvoice.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/statistic/statisticView.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/statistic/jqplotScript.js</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/user/insertUser.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/user/manageUsers.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/DAO.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/invoice/updateInvoice.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/statistic/daoOpenInvoices.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/statistic/daoClosedInvoices.php</file>
-            <file>file:/C:/Users/Malik/git/pretzelApartment/invoice/manageInvoices.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

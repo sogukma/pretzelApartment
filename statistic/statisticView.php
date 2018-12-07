@@ -27,7 +27,7 @@ $sh->isCorrectPape("abwart");
         <meta charset="utf-8" />
 
     <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
         <script language="javascript" type="text/javascript" src="../assets/jqPlot/jquery.jqplot.min.js"></script>
         <script language="javascript" type="text/javascript" src="../assets/jqPlot/plugins/jqplot.logAxisRenderer.min.js"></script>
         <script language="javascript" type="text/javascript" src="../assets/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
@@ -39,9 +39,9 @@ $sh->isCorrectPape("abwart");
         <link rel="stylesheet" type="text/css" href="../Header-Picture.css">
         <link rel="stylesheet" href="../style.css">
         <!-- Latest compiled and minified CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
    <!--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 
