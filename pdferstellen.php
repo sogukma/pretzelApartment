@@ -62,10 +62,10 @@ class myPDF extends FPDF{
  */
         function viewTable2($db, $userId){
         $stmt2 = $db->query("select user_streetnumber from users WHERE user_id = '$userId'");
-        $data = $stmt2->fetch(PDO::FETCH_OBJ);
+        $data2 = $stmt2->fetch(PDO::FETCH_OBJ);
      
-        //$this->Cell(30,5,'',0,0);
-        //$this->Cell(70,5,$data->user_streetnumber,0,1);
+        $this->Cell(30,5,'',0,0);
+        $this->Cell(70,5,$data2->user_streetnumber,0,1);
    }
                 
         $this->Cell(30,5,'An:',0,0);
@@ -137,6 +137,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage('P','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db, $userId);
+//$pdf->viewTable2($db, $userId);
 $pdf->Output();
 
 ?>
