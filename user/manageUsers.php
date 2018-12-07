@@ -22,15 +22,9 @@ $sh->isCorrectPape("abwart");
     <head>
 
 
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-        <!------ Include the above in your HEAD tag ---------->
-
-
-        <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>       
+    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../Header-Picture.css">
+
         <script type='text/javascript'>
             $(document).ready(function () {
                 $('.delete').click(function () {
@@ -59,9 +53,9 @@ $sh->isCorrectPape("abwart");
         </script>
     </head>
     <body>
-        <!-- Nav-Bar wird included  -->
+        <!-- Nav-Bar und alle JavaScript-Libraries werden included  -->
         <?php
-        include '../Header-Picture.html';
+        include '../Header.html';
         ?>
 
 
